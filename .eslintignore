@@ -1,0 +1,7 @@
+**/*.cjs
+**/*.mjs
+tailwind.config.ts
+public/**/*
+scripts/**/*
+__test__/**/*
+.eslintcache
