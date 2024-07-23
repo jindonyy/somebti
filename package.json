@@ -6,19 +6,32 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --ext .ts,.tsx .",
+    "lint": "eslint --cache --ext .ts,.tsx .",
     "lint:fix": "eslint --fix --ext .ts,.tsx .",
     "format": "prettier --cache --write",
     "format:css": "stylelint \"**/*.{css,scss}\" --fix",
     "type-check": "tsc --pretty --noEmit --isolatedModules",
-    "check-type": "tsc --noEmit"
+    "check-type": "tsc --noEmit",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --cache --fix",
+      "prettier --cache --write"
+    ]
   },
   "dependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "lodash": "^4.17.21",
     "next": "14.2.5",
+    "query-string": "^9.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -30,7 +43,8 @@
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.2.1",
-    "husky": "^9.1.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.7",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "stylelint": "^16.7.0",
