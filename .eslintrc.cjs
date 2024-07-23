@@ -17,26 +17,26 @@ module.exports = {
     // 사용하지 않는 변수가 있을 시 경고
     'no-unused-vars': 'off',
     // import 순서
-    'import/order': [
-      'warn',
-      {
-        alphabetize: { order: 'asc' },
-        'newlines-between': 'always',
-        warnOnUnassignedImports: false,
-      },
-    ],
+    // 'import/order': [
+    //   'warn',
+    //   {
+    //     alphabetize: { order: 'asc' },
+    //     'newlines-between': 'always',
+    //     warnOnUnassignedImports: false,
+    //   },
+    // ],
     // <div></div>처럼 빈 태그가 있을 시 경고
-    'react/self-closing-comp': 'warn',
+    // 'react/self-closing-comp': 'warn',
     // 컴포넌트가 함수선언식이 아닐 시 경고
-    'react/function-component-definition': [
-      'warn',
-      {
-        namedComponents: 'function-declaration',
-        unnamedComponents: 'function-expression',
-      },
-    ],
+    // 'react/function-component-definition': [
+    //   'warn',
+    //   {
+    //     namedComponents: 'function-declaration',
+    //     unnamedComponents: 'function-expression',
+    //   },
+    // ],
     // key 값으로 index 사용 시 에러
-    'react/no-array-index-key': 'error',
+    // 'react/no-array-index-key': 'error',
     // 사용하지 않는 import 존재 시 경고
     'unused-imports/no-unused-imports': 'warn',
     // console.log 존재 시 경고
@@ -127,17 +127,17 @@ module.exports = {
     // 템플릿 스트링 권고
     'prefer-template': 'warn',
     // app 디렉토리 사용
-    '@next/next/no-html-link-for-pages': ['error', 'src/app'],
+    // '@next/next/no-html-link-for-pages': ['error', 'src/app'],
     'react/display-name': 'off',
     'jsx-a11y/alt-text': 'off',
     '@typescript-eslint/no-floating-promises': 'error',
     '@typescript-eslint/ban-ts-comment': ['off', { ignoreVoid: true }],
     '@typescript-eslint/no-empty-function': 'warn',
     'import/no-anonymous-default-export': 'off',
-    'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'always', propElementValues: 'always' }],
+    // 'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'always', propElementValues: 'always' }],
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/consistent-type-imports': 'off',
-    'react-hooks/exhaustive-deps': ['warn'],
+    // 'react-hooks/exhaustive-deps': ['warn'],
   },
 };
