@@ -1,8 +1,30 @@
 module.exports = {
-  extends: ['@commitlint/config-conventional'],
-  rules: {
-    // 규칙을 작성합니다.
-    // e.g.
-    'type-case': [2, 'always', 'lower-case'],
-  },
+    extends: ['@commitlint/config-conventional'],
+    rules: {
+        'type-enum': [
+            2,
+            'always',
+            [
+                'build',
+                'chore',
+                'ci',
+                'docs',
+                'feat',
+                'fix',
+                'perf',
+                'refactor',
+                'revert',
+                'style',
+                'test',
+                'rename',
+                'remove',
+                'init',
+                'design',
+                'comment',
+                'hotfix',
+                'test',
+            ],
+        ],
+        'type-case': [2, 'always', 'lower-case'],
+    },
 };
