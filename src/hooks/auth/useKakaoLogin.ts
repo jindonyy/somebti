@@ -25,16 +25,16 @@ export const useKakaoLogin = () => {
     const getAccessToken = async () => {
         if (!authorizationCode) return;
 
-        const params = new URLSearchParams();
-        params.append('grant_type', 'authorization_code');
-        params.append('client_id', process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY || '');
-        params.append('redirect_uri', process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI || '');
-        params.append('code', authorizationCode);
-        params.append('client_secret', process.env.NEXT_PUBLIC_KAKAO_SECRET_KEY || '');
         const response = await fetch('https://kauth.kakao.com/oauth/token', {
             method: 'POST',
-            headers: { 'Content-type': 'application/x-www-form-urlencoded;charset=utf-8' },
-            body: params.toString(),
+            headers: new Headers({
+                'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+                grant_type: 'authorization_code',
+                client_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY || '',
+                redirect_uri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI || '',
+                code: authorizationCode,
+                client_secret: process.env.NEXT_PUBLIC_KAKAO_SECRET_KEY || '',
+            }),
         });
 
         if (!response.ok) {
