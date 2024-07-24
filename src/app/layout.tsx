@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import AuthProvider from '@/provider/AuthProvider';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,7 +25,13 @@ export default function RootLayout({
                     crossOrigin="anonymous"
                 ></script>
             </head>
-            <body className={inter.className}>{<AuthProvider>{children}</AuthProvider>}</body>
+            <body className={inter.className}>
+                {
+                    <Suspense>
+                        <AuthProvider>{children}</AuthProvider>
+                    </Suspense>
+                }
+            </body>
         </html>
     );
 }
