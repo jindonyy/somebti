@@ -1,9 +1,9 @@
+'use server';
+
 import { Center, Stack } from '@chakra-ui/react';
 import { KakaoLoginButton, LogoutButton, LeaveButton } from './components';
 
-interface Props {}
-
-export default function Page(props: Props) {
+export default async function Page() {
     return (
         <Center minH="100dvh">
             <Stack gap="20px">
