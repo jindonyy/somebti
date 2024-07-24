@@ -12,7 +12,7 @@ export const useKakaoLogin = () => {
 
     const initKakao = () => {
         if (window.Kakao && !window.Kakao.isInitialized()) {
-            window.Kakao.init(`${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}`);
+            window.Kakao.init(`${process.env.NEXT_PUBLIC_KAKAO_REST_JS_KEY}`);
         }
     };
 
@@ -25,16 +25,16 @@ export const useKakaoLogin = () => {
     const getAccessToken = async () => {
         if (!authorizationCode) return;
 
-        const response = await fetch('https://kauth.kakao.com/oauth/token', {
+        const url = new URL('https://kauth.kakao.com/oauth/token');
+        url.searchParams.set('code', authorizationCode);
+        url.searchParams.set('grant_type', 'authorization_code');
+        url.searchParams.set('client_id', process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY || '');
+        url.searchParams.set('client_secret', process.env.NEXT_PUBLIC_KAKAO_SECRET_KEY || '');
+        url.searchParams.set('redirect_uri', process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI || '');
+
+        const response = await fetch(url, {
             method: 'POST',
-            headers: new Headers({
-                'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-                grant_type: 'authorization_code',
-                client_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY || '',
-                redirect_uri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI || '',
-                code: authorizationCode,
-                client_secret: process.env.NEXT_PUBLIC_KAKAO_SECRET_KEY || '',
-            }),
+            headers: new Headers({ 'Content-type': 'application/x-www-form-urlencoded;charset=utf-8' }),
         });
 
         if (!response.ok) {
@@ -47,13 +47,12 @@ export const useKakaoLogin = () => {
     };
 
     const getKaKaoUserData = async (accessToken: string) => {
-        const kakaoUser = await fetch(`https://kapi.kakao.com/v2/user/me`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
+        window.Kakao.Auth.setAccessToken(accessToken);
+        const kakaoUserInfo = await window.Kakao.API.request({
+            url: '/v2/user/me',
         });
 
-        return (await kakaoUser.json()) as Promise<KakaoUser>;
+        return (await kakaoUserInfo.json()) as Promise<KakaoUser>;
     };
 
     useEffect(() => {
