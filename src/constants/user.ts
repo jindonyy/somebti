@@ -1,8 +1,8 @@
 import { EnumValues } from '@/types/commons';
 
 export const GENDER = {
-    MALE: { value: 'male', label: '남자' },
-    FEMALE: { value: 'female', label: '여자' },
+    MALE: { value: 'MALE', label: '남' },
+    FEMALE: { value: 'FEMALE', label: '여' },
 } as const;
 export type Gender = EnumValues<typeof GENDER>;
 

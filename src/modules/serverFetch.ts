@@ -1,4 +1,4 @@
-export const clientFetch = async <T>(...args: Parameters<typeof fetch>) => {
+export const serverFetch = async <T>(...args: Parameters<typeof fetch>) => {
     const url = (process.env.NEXT_PUBLIC_API_DOMAIN || '') + args[0];
     const options = {
         ...args[1],

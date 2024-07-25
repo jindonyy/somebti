@@ -1,12 +1,14 @@
 'use client';
 
+import { clientLogin } from '@/apis/auth';
 import { useAuthStore } from '@/stores/auth';
 import { KakaoToken } from '@/types/auth';
 import { KakaoUser } from '@/types/user';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 export const useKakaoLogin = () => {
+    const router = useRouter();
     const searchParams = useSearchParams();
     const authorizationCode = searchParams?.get('code');
 
@@ -22,7 +24,7 @@ export const useKakaoLogin = () => {
         });
     };
 
-    const getAccessToken = async () => {
+    const getKakaoToken = async () => {
         if (!authorizationCode) return;
 
         const url = new URL('https://kauth.kakao.com/oauth/token');
@@ -46,13 +48,13 @@ export const useKakaoLogin = () => {
         return response.json() as Promise<KakaoToken>;
     };
 
-    const getKaKaoUserData = async (accessToken: string) => {
-        window.Kakao.Auth.setAccessToken(accessToken);
+    const getKaKaoUserData = async (kakaoToken: string) => {
+        window.Kakao.Auth.setAccessToken(kakaoToken);
         const kakaoUserInfo = await window.Kakao.API.request({
             url: '/v2/user/me',
         });
 
-        return (await kakaoUserInfo.json()) as Promise<KakaoUser>;
+        return kakaoUserInfo.json() as Promise<KakaoUser>;
     };
 
     useEffect(() => {
@@ -60,16 +62,24 @@ export const useKakaoLogin = () => {
     }, []);
 
     useEffect(() => {
-        const setKakaoLoginData = async () => {
-            const kakaoToken = await getAccessToken();
+        const login = async () => {
+            const kakaoToken = await getKakaoToken();
             if (kakaoToken) {
                 const kakaoUserData = await getKaKaoUserData(kakaoToken.access_token);
+                const { user } = await clientLogin(kakaoUserData.id);
                 useAuthStore.setState({ kakaoToken });
-                useAuthStore.setState(({ user }) => ({ user: { ...user, ...kakaoUserData } }));
+
+                if (user) {
+                    useAuthStore.setState(() => ({ user }));
+                    router.push('/signup');
+                } else {
+                    useAuthStore.setState((prev) => ({ user: { ...prev.user, ...kakaoUserData } }));
+                    router.push('/answer');
+                }
             }
         };
 
-        void setKakaoLoginData();
+        void login();
     }, [authorizationCode]);
 
     return { kakaoLogin, authorizationCode };

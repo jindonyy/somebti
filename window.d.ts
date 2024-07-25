@@ -16,7 +16,7 @@ interface Window {
                 throughTalk?: boolean; //default true
             }) => void;
             getStatusInfo: () => Promise<{ status: 'connected' | 'not_connected'; user: unknown }>;
-            setAccessToken: (access_token: string) => void;
+            setAccessToken: (accessToken: string) => void;
             logout: () => void;
         };
     };

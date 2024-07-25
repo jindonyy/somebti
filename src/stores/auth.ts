@@ -9,13 +9,13 @@ export interface AuthStore {
 }
 
 const initialUser = {
-    userId: null,
+    kakaoId: '',
     userName: '',
-    nickName: '',
-    birthday: null,
+    email: null,
+    birth: null,
     gender: null,
     mbti: null,
-    profileUrl: null,
+    profileImageUrl: null,
 };
 
 export const useAuthStore = create<AuthStore>(() => ({
