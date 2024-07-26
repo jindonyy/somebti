@@ -1,6 +1,5 @@
-import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores';
 import { Input } from '@chakra-ui/react';
-import dayjs from 'dayjs';
 import { ChangeEventHandler, useEffect } from 'react';
 
 interface Props {
@@ -9,13 +8,12 @@ interface Props {
     setValue: (value: Record<string, string>) => void;
 }
 
-export default function BirthSection(props: Props) {
+export default function NameSection(props: Props) {
     const { property, setCanNext, setValue } = props;
-    const user = useAuthStore(({ user }) => user);
-    const defaultValue = user.birth ? dayjs(user.birth).format('yyyy-mm-dd') : dayjs().format('yyyy-mm-dd');
+    const user = useUserStore(({ user }) => user);
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        if (event.target.value) {
+        if (event.target.value.length >= 2) {
             setCanNext(true);
             setValue({ [property]: event.target.value });
         } else {
@@ -24,7 +22,7 @@ export default function BirthSection(props: Props) {
     };
 
     useEffect(() => {
-        if (!user.birth) {
+        if (!user.userName) {
             setCanNext(false);
         }
     }, []);
@@ -32,13 +30,14 @@ export default function BirthSection(props: Props) {
     return (
         <Input
             onChange={handleChange}
-            type="date"
-            defaultValue={defaultValue}
+            variant="unstyled"
+            placeholder="최대 10글자"
+            maxLength={10}
             height="52px"
             px="16px"
-            bg="#fff"
-            rounded="8px"
-            border="0"
+            bg="white"
+            rounded="12px"
+            defaultValue={user.userName}
         />
     );
 }

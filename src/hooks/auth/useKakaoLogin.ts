@@ -1,7 +1,7 @@
 'use client';
 
 import { clientLogin } from '@/apis/auth';
-import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores';
 import { KakaoToken } from '@/types/auth';
 import { KakaoUser } from '@/types/user';
 import { getCookie, setCookie } from 'cookies-next';
@@ -12,8 +12,7 @@ export const useKakaoLogin = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const authorizationCode = searchParams?.get('code');
-    const authStore = useAuthStore(({ user, setUser, setKakaoToken }) => ({ user, setUser, setKakaoToken }));
-
+    const userStore = useUserStore(({ user, setUser }) => ({ user, setUser }));
     const initKakao = () => {
         if (window.Kakao && !window.Kakao.isInitialized()) {
             window.Kakao.init(`${process.env.NEXT_PUBLIC_KAKAO_REST_JS_KEY}`);
@@ -77,10 +76,10 @@ export const useKakaoLogin = () => {
                 const { user, token } = await clientLogin(`${kakaoUserData.id}`);
                 if (user && token) {
                     setCookie('access_token', token.access_token);
-                    authStore.setUser(user);
+                    userStore.setUser(user);
                     router.push('/');
                 } else {
-                    authStore.setUser({ ...authStore.user, ...kakaoUserData });
+                    userStore.setUser({ ...userStore.user, ...kakaoUserData });
                     router.push('/signup');
                 }
             };

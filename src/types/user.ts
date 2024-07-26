@@ -39,3 +39,14 @@ export type User = {
     profileImageUrl?: string | null;
     datingExperience?: string;
 };
+
+export type Other = {
+    userName: string;
+    mbti: MBTI | null;
+    gender: Gender | null;
+    birth: Date | null;
+    job?: string;
+    siblings?: string;
+    interest?: string;
+    datingExperience?: string;
+};

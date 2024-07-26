@@ -1,6 +1,13 @@
 import { ButtonProps, Button as ChakraButton } from '@chakra-ui/react';
 
-export default function BottomButton(props: ButtonProps) {
+interface Props<T extends React.ElementType> extends ButtonProps {
+    as?: T;
+    children?: React.ReactNode;
+}
+
+export default function BottomButton<T extends React.ElementType = 'button'>(
+    props: Props<T> & Omit<React.ComponentPropsWithoutRef<T>, keyof Props<T>>,
+) {
     return (
         <ChakraButton
             height="52px"

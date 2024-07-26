@@ -1,6 +1,6 @@
 import { Grid, Stack, useRadioGroup } from '@chakra-ui/react';
 import MBTICard from './MBTICard';
-import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores';
 import { useEffect, useRef } from 'react';
 
 interface Props {
@@ -18,7 +18,7 @@ const options = [
 
 export default function MBTISection(props: Props) {
     const { property, setCanNext, setValue } = props;
-    const user = useAuthStore(({ user }) => user);
+    const user = useUserStore(({ user }) => user);
     const defaultValues = user.mbti?.split('');
     const values = useRef(defaultValues ? [...defaultValues] : ['', '', '', '']);
 

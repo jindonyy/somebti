@@ -1,5 +1,5 @@
 import { Stack, useRadioGroup } from '@chakra-ui/react';
-import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores';
 import { GENDER } from '@/constants/user';
 import GenderCard from './GenderCard';
 import { useEffect } from 'react';
@@ -12,7 +12,7 @@ interface Props {
 
 export default function GenderSection(props: Props) {
     const { property, setCanNext, setValue } = props;
-    const user = useAuthStore(({ user }) => user);
+    const user = useUserStore(({ user }) => user);
 
     const handleChange = (value: string) => {
         setCanNext(true);

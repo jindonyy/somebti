@@ -1,12 +1,13 @@
 'use client';
 
 import { Stack, useSteps } from '@chakra-ui/react';
-import { BirthSection, GenderSection, MBTISection, NameSection, Progress } from './components';
+import { BirthSection, GenderSection, MBTISection, NameSection, Progress } from '@/app/(auth)/components';
 import { BottomButton, Title } from '@/components';
 import { useState } from 'react';
-import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores';
 import { clientSignUp } from '@/apis/auth';
 import { setCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
 
 const steps = [
     {
@@ -37,9 +38,10 @@ const steps = [
 ];
 
 export default function Page() {
+    const router = useRouter();
     const [canNext, setCanNext] = useState(false);
     const [value, setValue] = useState<Record<string, string> | null>(null);
-    const authStore = useAuthStore(({ setUser, user }) => ({ setUser, user }));
+    const userStore = useUserStore(({ setUser, user }) => ({ setUser, user }));
     const { activeStep, setActiveStep } = useSteps({
         index: 0,
         count: steps.length,
@@ -55,9 +57,9 @@ export default function Page() {
 
     const handleSignUp = async () => {
         try {
-            const { token, user } = await clientSignUp(authStore.user);
+            const { token, user } = await clientSignUp(userStore.user);
             if (user && token) {
-                authStore.setUser(user);
+                userStore.setUser(user);
                 setCookie('access_token', token.access_token);
             }
         } catch (error: any) {
@@ -69,8 +71,9 @@ export default function Page() {
     const handleNext = () => {
         if (isLastStep) {
             void handleSignUp();
+            router.push('/o');
         } else {
-            authStore.setUser({ ...authStore.user, ...value });
+            userStore.setUser({ ...userStore.user, ...value });
             setValue(null);
             setActiveStep(activeStep + 1);
         }
