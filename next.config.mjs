@@ -25,6 +25,9 @@ const nextConfig = {
 
         return config;
     },
+    async rewrites() {
+        return [{ source: '/', destination: '/consulting' }];
+    },
 };
 
 export default nextConfig;
