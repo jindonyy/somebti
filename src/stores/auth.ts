@@ -6,6 +6,9 @@ export interface AuthStore {
     user: User;
     kakaoToken: KakaoToken | null;
     isAuthenticated: boolean;
+    setUser: (user: User) => void;
+    setKakaoToken: (kakaoToken: KakaoToken) => void;
+    setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
 
 const initialUser = {
@@ -18,8 +21,11 @@ const initialUser = {
     profileImageUrl: null,
 };
 
-export const useAuthStore = create<AuthStore>(() => ({
+export const useAuthStore = create<AuthStore>((set) => ({
     user: initialUser,
     kakaoToken: null,
     isAuthenticated: false,
+    setUser: (user: User) => set(() => ({ user })),
+    setKakaoToken: (kakaoToken: KakaoToken) => set(() => ({ kakaoToken })),
+    setIsAuthenticated: (isAuthenticated: boolean) => set(() => ({ isAuthenticated })),
 }));

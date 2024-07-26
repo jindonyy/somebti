@@ -1,7 +1,10 @@
 'use client';
 
 import { Stack, useSteps } from '@chakra-ui/react';
-import { MBTISection, NameSection, Progress, UserInfoSection } from './components';
+import { BirthSection, GenderSection, MBTISection, NameSection, Progress } from './components';
+import { BottomButton, Title } from '@/app/components/common';
+import { useState } from 'react';
+import { useAuthStore } from '@/stores/auth';
 
 const steps = [
     {
@@ -20,43 +23,59 @@ const steps = [
         property: 'gender',
         title: '성별이 어떻게 되나요?',
         description: '메세지 추천을 위해 필요해요',
-        component: MBTISection,
+        component: GenderSection,
     },
     {
         property: 'birth',
         title: '생년월일을 선택해주세요',
         description: '메세지 추천을 위해 필요해요',
-        component: MBTISection,
+        component: BirthSection,
+        skip: true,
     },
 ];
 
 export default function Page() {
+    const [canNext, setCanNext] = useState(false);
+    const [value, setValue] = useState<Record<string, string> | null>(null);
+    const { setUser, user } = useAuthStore(({ setUser, user }) => ({ setUser, user }));
     const { activeStep, setActiveStep } = useSteps({
         index: 0,
         count: steps.length,
     });
     const currentStep = steps[activeStep] as (typeof steps)[0];
-    const Compoent = currentStep.component;
+    const Component = currentStep.component;
 
     const handlePrev = () => {
+        setCanNext(true);
         setActiveStep(activeStep - 1);
     };
 
     const handleNext = () => {
+        setUser({ ...user, ...value });
+        setValue(null);
         setActiveStep(activeStep + 1);
     };
 
     return (
         <Stack as="main" position="relative" gap="0px">
-            <Progress stepsSize={steps.length} activeStep={activeStep} onPrev={handlePrev} />
-            <UserInfoSection
-                property={currentStep.property}
-                title={currentStep.title || ''}
-                description={currentStep.description || ''}
+            <Progress
+                stepsSize={steps.length}
+                activeStep={activeStep}
+                onPrev={handlePrev}
                 onNext={handleNext}
-            >
-                <Compoent />
-            </UserInfoSection>
+                skip={currentStep.skip}
+            />
+            <Stack flexGrow="1" justify="space-between" p="0px 24px 66px">
+                <Stack flexGrow="1" pt="52px" gap="26px">
+                    <Title title={currentStep.title || ''} description={currentStep.description} />
+                    <Stack as="form">
+                        <Component property={currentStep.property} setCanNext={setCanNext} setValue={setValue} />
+                    </Stack>
+                </Stack>
+                <BottomButton isDisabled={!canNext} onClick={handleNext}>
+                    다음
+                </BottomButton>
+            </Stack>
         </Stack>
     );
 }

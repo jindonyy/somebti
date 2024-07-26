@@ -1,11 +1,11 @@
-import { Box, Center, useRadio, UseRadioProps } from '@chakra-ui/react';
+import { Box, Center, useRadio } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-interface Props extends UseRadioProps {
+interface Props {
     children: ReactNode;
 }
 
-export default function MBTICard(props: Props) {
+export default function GenderCard(props: Props) {
     const { children, ...rest } = props;
     const { getInputProps, getRadioProps } = useRadio(rest);
 
@@ -17,11 +17,10 @@ export default function MBTICard(props: Props) {
             <input {...input} />
             <Center
                 {...checkbox}
-                height="92px"
+                height="72px"
                 cursor="pointer"
                 borderRadius="12px"
                 fontWeight="500"
-                fontSize="20px"
                 color="#737373"
                 bgColor="#fff"
                 transition="all 0.1s ease-in"

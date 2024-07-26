@@ -1,4 +1,5 @@
 export { default as Progress } from './Progress';
-export { default as UserInfoSection } from './UserInfoSection';
 export { default as NameSection } from './NameSection';
 export { default as MBTISection } from './MBTISection';
+export { default as GenderSection } from './GenderSection';
+export { default as BirthSection } from './BirthSection';
