@@ -19,7 +19,7 @@ export default function Navigation() {
     const path = usePathname();
 
     const isAnswerPage = useMemo(() => path.startsWith('/answer'), [path]);
-    const isConsultingPage = useMemo(() => path.startsWith('/consulting'), [path]);
+    const isConsultingPage = useMemo(() => path === '/' ?? path.startsWith('/consulting'), [path]);
     const isFirstTalkPage = useMemo(() => path.startsWith('/first_talk'), [path]);
     const isProfilePage = useMemo(() => path.startsWith('/profile'), [path]);
 
