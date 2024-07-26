@@ -10,7 +10,7 @@ export type KakaoToken = {
 };
 
 export type AuthToken = {
-    accessToken: string;
+    access_token: string;
 };
 
 export type LoginResponse = {

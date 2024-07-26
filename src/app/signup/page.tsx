@@ -58,7 +58,7 @@ export default function Page() {
             const { token, user } = await clientSignUp(authStore.user);
             if (user && token) {
                 authStore.setUser(user);
-                setCookie('authToken', token);
+                setCookie('access_token', token.access_token);
             }
         } catch (error: any) {
             console.error(error);

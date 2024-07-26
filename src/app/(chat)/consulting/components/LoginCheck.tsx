@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 export default function LoginCheck() {
     const router = useRouter();
-    const hasAuthToken = hasCookie('authToken');
+    const hasAuthToken = hasCookie('access_token');
 
     useEffect(() => {
         if (!hasAuthToken) {
