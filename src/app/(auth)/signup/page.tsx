@@ -39,9 +39,9 @@ const steps = [
 
 export default function Page() {
     const router = useRouter();
-    const [canNext, setCanNext] = useState(false);
-    const [value, setValue] = useState<Record<string, string> | null>(null);
     const userStore = useUserStore(({ setUser, user }) => ({ setUser, user }));
+    const [canNext, setCanNext] = useState(userStore.user.userName ? true : false);
+    const [value, setValue] = useState<Record<string, string> | null>(null);
     const { activeStep, setActiveStep } = useSteps({
         index: 0,
         count: steps.length,
@@ -61,17 +61,17 @@ export default function Page() {
             if (user && token) {
                 userStore.setUser(user);
                 setCookie('access_token', token.access_token);
+                router.replace('/other');
             }
         } catch (error: any) {
             console.error(error);
-            alert(error.message);
+            if (error?.message) alert(error.message);
         }
     };
 
     const handleNext = () => {
         if (isLastStep) {
             void handleSignUp();
-            router.push('/o');
         } else {
             userStore.setUser({ ...userStore.user, ...value });
             setValue(null);
