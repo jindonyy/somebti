@@ -1,5 +1,5 @@
 import { Center } from '@chakra-ui/react';
-import Navigation from './components/navigation';
+import { Navigation } from './components';
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
     return (
