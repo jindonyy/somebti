@@ -1,3 +1,10 @@
+import LoginCheck from './components/LoginCheck';
+
 export default async function Page() {
-    return <div>Consulting Page</div>;
+    return (
+        <div>
+            <LoginCheck />
+            Consulting Page
+        </div>
+    );
 }
