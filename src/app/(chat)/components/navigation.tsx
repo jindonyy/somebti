@@ -25,17 +25,17 @@ export default function Navigation() {
 
     return (
         <Flex
-            py={12}
-            px={24}
-            pt={6}
-            pb={21}
+            py="12px"
+            px="24px"
+            pt="6px"
+            pb="21px"
             bg="white"
             w="100%"
             justify="space-between"
             position="fixed"
             bottom={0}
             zIndex={100}
-            maxW={420}
+            maxW="420px"
         >
             <Link href="/answer">{isAnswerPage ? <AnswerOn /> : <AnswerOff />}</Link>
             <Link href="/consulting">{isConsultingPage ? <ConsultingOn /> : <ConsultingOff />}</Link>
