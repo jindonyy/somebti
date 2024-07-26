@@ -12,7 +12,7 @@ interface Props {
 
 export default function BirthSection(props: Props) {
     const { user, property, setCanNext, setValue } = props;
-    const defaultValue = user.birth ? dayjs(user.birth).format('yyyy-mm-dd') : dayjs().format('yyyy-mm-dd');
+    const defaultValue = user.birth ? dayjs(user.birth).format('YYYY-MM-DD') : undefined;
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         if (event.target.value) {

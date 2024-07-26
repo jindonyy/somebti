@@ -32,7 +32,7 @@ export type User = {
     userName: string;
     mbti: MBTI | null;
     gender: Gender | null;
-    birth: Date | null;
+    birth: Date | string | null;
     job?: string;
     siblings?: string;
     interest?: string;
