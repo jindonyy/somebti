@@ -1,1 +1,9 @@
 export { default as Symbol } from './symbol.svg';
+export { default as AnswerOn } from './answer-on.svg';
+export { default as AnswerOff } from './answer-off.svg';
+export { default as ConsultingOn } from './consulting-on.svg';
+export { default as ConsultingOff } from './consulting-off.svg';
+export { default as FirstTalkOn } from './first-talk-on.svg';
+export { default as FirstTalkOff } from './first-talk-off.svg';
+export { default as ProfileOn } from './profile-on.svg';
+export { default as ProfileOff } from './profile-off.svg';
