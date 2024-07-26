@@ -54,7 +54,7 @@ export const useKakaoLogin = () => {
             url: '/v2/user/me',
         });
 
-        return kakaoUserInfo.json() as Promise<KakaoUser>;
+        return kakaoUserInfo as KakaoUser;
     };
 
     useEffect(() => {
@@ -71,10 +71,10 @@ export const useKakaoLogin = () => {
 
                 if (user) {
                     useAuthStore.setState(() => ({ user }));
-                    router.push('/signup');
+                    router.push('/answer');
                 } else {
                     useAuthStore.setState((prev) => ({ user: { ...prev.user, ...kakaoUserData } }));
-                    router.push('/answer');
+                    router.push('/signup');
                 }
             }
         };

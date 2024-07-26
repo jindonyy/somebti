@@ -7,7 +7,7 @@ interface Props {}
 export default async function Page(props: Props) {
     return (
         <Stack as="main">
-            <Text>회원가입</Text>
+            <Text>대답하기</Text>
         </Stack>
     );
 }

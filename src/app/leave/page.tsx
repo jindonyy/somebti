@@ -3,7 +3,7 @@
 import { Center, Stack } from '@chakra-ui/react';
 import { LeaveButton } from './components';
 
-export default function Page() {
+export default async function Page() {
     return (
         <Center as="main" minH="100dvh">
             <Stack gap="20px">
