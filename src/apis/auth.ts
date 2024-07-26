@@ -11,7 +11,7 @@ export const clientLogin = async (id: string) => {
 };
 
 export const clientSignUp = async (params: User) => {
-    const response = await clientFetch<SignUpResponse>(`auth/signup`, {
+    const response = await clientFetch<SignUpResponse>(`/auth/signup`, {
         method: 'POST',
         body: JSON.stringify(params),
     });
