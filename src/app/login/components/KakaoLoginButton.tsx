@@ -1,6 +1,6 @@
 'use client';
 
-import { useKakaoLogin } from '@/hooks/auth/useKakaoLogin';
+import { useKakaoLogin } from '@/hooks';
 import { BottomButton } from '@/components';
 
 export default function KakaoLoginButton() {

@@ -27,15 +27,15 @@ export type KakaoUser = {
 };
 
 export type User = {
+    email?: string | null;
     kakaoId: string;
     userName: string;
-    email?: string | null;
-    birth: Date | null;
-    gender: Gender | null;
     mbti: MBTI | null;
-    profileImageUrl?: string | null;
+    gender: Gender | null;
+    birth: Date | null;
     job?: string;
     siblings?: string;
     interest?: string;
+    profileImageUrl?: string | null;
     datingExperience?: string;
 };

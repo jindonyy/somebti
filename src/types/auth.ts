@@ -14,6 +14,11 @@ export type AuthToken = {
 };
 
 export type LoginResponse = {
-    authToken: AuthToken;
-    user: User;
+    token: AuthToken | null;
+    user: User | null;
+};
+
+export type SignUpResponse = {
+    token: AuthToken | null;
+    user: User | null;
 };

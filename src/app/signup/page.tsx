@@ -5,6 +5,8 @@ import { BirthSection, GenderSection, MBTISection, NameSection, Progress } from 
 import { BottomButton, Title } from '@/components';
 import { useState } from 'react';
 import { useAuthStore } from '@/stores/auth';
+import { clientSignUp } from '@/apis/auth';
+import { setCookie } from 'cookies-next';
 
 const steps = [
     {
@@ -37,11 +39,12 @@ const steps = [
 export default function Page() {
     const [canNext, setCanNext] = useState(false);
     const [value, setValue] = useState<Record<string, string> | null>(null);
-    const { setUser, user } = useAuthStore(({ setUser, user }) => ({ setUser, user }));
+    const authStore = useAuthStore(({ setUser, user }) => ({ setUser, user }));
     const { activeStep, setActiveStep } = useSteps({
         index: 0,
         count: steps.length,
     });
+    const isLastStep = activeStep === steps.length - 1;
     const currentStep = steps[activeStep] as (typeof steps)[0];
     const Component = currentStep.component;
 
@@ -50,13 +53,28 @@ export default function Page() {
         setActiveStep(activeStep - 1);
     };
 
-    const handleNext = () => {
-        setUser({ ...user, ...value });
-        setValue(null);
-        setActiveStep(activeStep + 1);
+    const handleSignUp = async () => {
+        try {
+            const { token, user } = await clientSignUp(authStore.user);
+            if (user && token) {
+                authStore.setUser(user);
+                setCookie('authToken', token);
+            }
+        } catch (error: any) {
+            console.error(error);
+            alert(error.message);
+        }
     };
 
-    const handleSignUp = () => {};
+    const handleNext = () => {
+        if (isLastStep) {
+            void handleSignUp();
+        } else {
+            authStore.setUser({ ...authStore.user, ...value });
+            setValue(null);
+            setActiveStep(activeStep + 1);
+        }
+    };
 
     return (
         <Stack as="main" position="relative" gap="0px">
