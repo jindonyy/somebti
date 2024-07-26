@@ -1,3 +1,4 @@
+export * from './icons';
 export { default as Symbol } from './symbol.svg';
 export { default as AnswerOn } from './answer-on.svg';
 export { default as AnswerOff } from './answer-off.svg';

@@ -1,9 +1,9 @@
 'use client';
 
-import { Button } from '@chakra-ui/react';
+import { BottomButton } from '@/app/components/common';
 
 export default function LeaveButton() {
     const handleLeave = () => null;
 
-    return <Button onClick={handleLeave}>탈퇴</Button>;
+    return <BottomButton onClick={handleLeave}>탈퇴</BottomButton>;
 }

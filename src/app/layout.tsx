@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import AuthProvider from '@/provider/AuthProvider';
 import { Suspense } from 'react';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,7 +29,9 @@ export default function RootLayout({
             <body className={inter.className}>
                 {
                     <Suspense>
-                        <AuthProvider>{children}</AuthProvider>
+                        <ChakraProvider resetCSS>
+                            <AuthProvider>{children}</AuthProvider>
+                        </ChakraProvider>
                     </Suspense>
                 }
             </body>

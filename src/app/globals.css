@@ -6,7 +6,7 @@ body {
     font-size: 16px;
     font-weight: 400;
     line-height: 1.4;
-    color: #1f1f1f;
+    color: #262626;
 }
 
 main {
@@ -16,7 +16,7 @@ main {
     margin: 0 auto;
     background: linear-gradient(
             131.89deg,
-            rgba(255, 255, 255, 0.0977347) 12.37%,
+            rgba(255, 255, 255, 0.0977347) 2.37%,
             rgba(151, 71, 255, 0.04) 18.91%,
             rgba(217, 89, 245, 0.04) 46.19%,
             rgba(151, 71, 255, 0.06) 64.26%,
@@ -24,6 +24,7 @@ main {
             rgba(151, 71, 255, 0.04) 89.24%
         )
         #fff;
+
     overflow: hidden;
 }
 
