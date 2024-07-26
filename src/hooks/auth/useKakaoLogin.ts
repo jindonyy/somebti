@@ -77,9 +77,13 @@ export const useKakaoLogin = () => {
                 if (user && token) {
                     setCookie('access_token', token.access_token);
                     userStore.setUser(user);
-                    router.push('/');
+                    router.replace('/');
                 } else {
-                    userStore.setUser({ ...userStore.user, ...kakaoUserData });
+                    userStore.setUser({
+                        ...userStore.user,
+                        email: kakaoUserData.kakao_account.email,
+                        profileImageUrl: kakaoUserData.kakao_account.profile.profile_image_url,
+                    });
                     router.push('/signup');
                 }
             };
