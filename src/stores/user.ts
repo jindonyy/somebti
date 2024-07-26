@@ -3,9 +3,9 @@ import { create } from 'zustand';
 
 export interface UserStore {
     user: User;
-    others: Other[];
+    other: Other;
     setUser: (user: User) => void;
-    addOther: (other: Other) => void;
+    setOther: (other: Other) => void;
 }
 
 const initialUser = {
@@ -18,9 +18,16 @@ const initialUser = {
     profileImageUrl: null,
 };
 
+const initialOther = {
+    userName: '',
+    birth: null,
+    gender: null,
+    mbti: null,
+};
+
 export const useUserStore = create<UserStore>((set) => ({
     user: initialUser,
-    others: [],
+    other: initialOther,
     setUser: (user: User) => set(() => ({ user })),
-    addOther: (other: Other) => set((prev) => ({ others: [...prev.others, other] })),
+    setOther: (other: Other) => set(() => ({ other })),
 }));

@@ -5,32 +5,29 @@ import { BirthSection, GenderSection, MBTISection, NameSection, Progress } from 
 import { BottomButton, Title } from '@/components';
 import { useState } from 'react';
 import { useUserStore } from '@/stores';
-import { clientSignUp } from '@/apis/auth';
-import { setCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
 
 const steps = [
     {
         property: 'userName',
-        title: '이름을 입력해주세요',
+        title: '상대의 이름을 입력해주세요',
         description: '서비스 내에서 사용됩니다',
         component: NameSection,
     },
     {
         property: 'mbti',
-        title: '당신의 MBTI는 무엇인가요?',
-        description: 'MBTI타입으로 나에 대해 알아봐요',
+        title: '상대의 MBTI는 무엇인가요?',
+        description: 'MBTI타입으로 상대에 대해 알아봐요',
         component: MBTISection,
     },
     {
         property: 'gender',
-        title: '성별이 어떻게 되나요?',
+        title: '상대의 성별이 어떻게 되나요?',
         description: '메세지 추천을 위해 필요해요',
         component: GenderSection,
     },
     {
         property: 'birth',
-        title: '생년월일을 선택해주세요',
+        title: '상대의 생년월일을 선택해주세요',
         description: '메세지 추천을 위해 필요해요',
         component: BirthSection,
         skip: true,
@@ -38,10 +35,9 @@ const steps = [
 ];
 
 export default function Page() {
-    const router = useRouter();
     const [canNext, setCanNext] = useState(false);
     const [value, setValue] = useState<Record<string, string> | null>(null);
-    const userStore = useUserStore(({ setUser, user }) => ({ setUser, user }));
+    const userStore = useUserStore(({ setOther, other }) => ({ setOther, other }));
     const { activeStep, setActiveStep } = useSteps({
         index: 0,
         count: steps.length,
@@ -55,25 +51,23 @@ export default function Page() {
         setActiveStep(activeStep - 1);
     };
 
-    const handleSignUp = async () => {
-        try {
-            const { token, user } = await clientSignUp(userStore.user);
-            if (user && token) {
-                userStore.setUser(user);
-                setCookie('access_token', token.access_token);
-            }
-        } catch (error: any) {
-            console.error(error);
-            alert(error.message);
-        }
+    const handleSubmit = async () => {
+        // try {
+        //     const { token, user } = await clientSignUp(userStore.other);
+        //     if (user && token) {
+        //         userStore.setOther(user);
+        //         setCookie('access_token', token.access_token);
+        //     }
+        // } catch (error) {
+        //     console.error(error);
+        // }
     };
 
     const handleNext = () => {
         if (isLastStep) {
-            void handleSignUp();
-            router.push('/o');
+            void handleSubmit();
         } else {
-            userStore.setUser({ ...userStore.user, ...value });
+            userStore.setOther({ ...userStore.other, ...value });
             setValue(null);
             setActiveStep(activeStep + 1);
         }
@@ -93,7 +87,7 @@ export default function Page() {
                     <Title title={currentStep.title || ''} description={currentStep.description} />
                     <Stack as="form">
                         <Component
-                            user={userStore.user}
+                            user={userStore.other}
                             property={currentStep.property}
                             setCanNext={setCanNext}
                             setValue={setValue}

@@ -1,16 +1,16 @@
-import { useUserStore } from '@/stores';
+import { Other, User } from '@/types';
 import { Input } from '@chakra-ui/react';
 import { ChangeEventHandler, useEffect } from 'react';
 
 interface Props {
+    user: User | Other;
     property: string;
     setCanNext: (canNext: boolean) => void;
     setValue: (value: Record<string, string>) => void;
 }
 
 export default function NameSection(props: Props) {
-    const { property, setCanNext, setValue } = props;
-    const user = useUserStore(({ user }) => user);
+    const { user, property, setCanNext, setValue } = props;
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         if (event.target.value.length >= 2) {

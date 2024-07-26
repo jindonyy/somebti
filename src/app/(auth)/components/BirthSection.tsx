@@ -1,17 +1,17 @@
-import { useUserStore } from '@/stores';
+import { Other, User } from '@/types';
 import { Input } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { ChangeEventHandler, useEffect } from 'react';
 
 interface Props {
+    user: User | Other;
     property: string;
     setCanNext: (canNext: boolean) => void;
     setValue: (value: Record<string, string>) => void;
 }
 
 export default function BirthSection(props: Props) {
-    const { property, setCanNext, setValue } = props;
-    const user = useUserStore(({ user }) => user);
+    const { user, property, setCanNext, setValue } = props;
     const defaultValue = user.birth ? dayjs(user.birth).format('yyyy-mm-dd') : dayjs().format('yyyy-mm-dd');
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
