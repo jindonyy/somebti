@@ -3,7 +3,7 @@
 import { Stack } from '@chakra-ui/react';
 import { KakaoLoginButton } from './components';
 import { Symbol } from '@/assets';
-import { Title } from '@/app/components/common';
+import { Title } from '@/components';
 
 export default async function Page() {
     return (

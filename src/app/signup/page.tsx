@@ -2,7 +2,7 @@
 
 import { Stack, useSteps } from '@chakra-ui/react';
 import { BirthSection, GenderSection, MBTISection, NameSection, Progress } from './components';
-import { BottomButton, Title } from '@/app/components/common';
+import { BottomButton, Title } from '@/components';
 import { useState } from 'react';
 import { useAuthStore } from '@/stores/auth';
 
@@ -55,6 +55,8 @@ export default function Page() {
         setValue(null);
         setActiveStep(activeStep + 1);
     };
+
+    const handleSignUp = () => {};
 
     return (
         <Stack as="main" position="relative" gap="0px">

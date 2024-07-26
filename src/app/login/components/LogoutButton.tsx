@@ -1,6 +1,6 @@
 'use client';
 
-import { BottomButton } from '@/app/components/common';
+import { BottomButton } from '@/components';
 
 export default function LogoutButton() {
     const handleLogout = () => null;
