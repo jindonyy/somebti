@@ -3,7 +3,7 @@
 import { clientLogin } from '@/apis/auth';
 import { useUserStore } from '@/stores';
 import { KakaoToken } from '@/types/auth';
-import { KakaoUser } from '@/types/user';
+import { KakaoUser, User } from '@/types/user';
 import { getCookie, setCookie } from 'cookies-next';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
@@ -75,8 +75,6 @@ export const useKakaoLogin = () => {
                 }
 
                 const kakaoUserData = await getKaKaoUserData(kakaoAccessToken);
-                console.log(kakaoUserData)
-                userStore.setUser({ ...userStore.user, kakaoId: String(kakaoUserData.id) });
                 const { user, opponent, token } = await clientLogin(`${kakaoUserData.id}`);
                 if (user && opponent && token) {
                     setCookie('access_token', token);
@@ -88,6 +86,7 @@ export const useKakaoLogin = () => {
                         ...userStore.user,
                         email: kakaoUserData.kakao_account.email,
                         profileImageUrl: kakaoUserData.kakao_account.profile.profile_image_url,
+                        kakaoId: String(kakaoUserData.id),
                     });
                     router.push('/signup');
                 }
