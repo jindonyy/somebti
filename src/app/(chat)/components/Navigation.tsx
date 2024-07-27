@@ -45,14 +45,7 @@ export default function Navigation() {
             >
                 {isConsultingPage ? <ConsultingOnIcon /> : <ConsultingOffIcon />}
             </IconButton>
-            <IconButton
-                onClick={handleAlert}
-                bg="transparent"
-                _hover={{ bg: 'transparent' }}
-                aria-label="navigation button"
-            >
-                {isProfilePage ? <ProfileOnIcon /> : <ProfileOffIcon />}
-            </IconButton>
+            <Link href="/profile">{isProfilePage ? <ProfileOnIcon /> : <ProfileOffIcon />}</Link>
         </Flex>
     );
 }
