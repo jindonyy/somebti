@@ -2,26 +2,8 @@
 
 import { Box, Center, Stack } from '@chakra-ui/react';
 import { ActionButton, AIChat, MyChat, OpponentChat } from '@/app/(chat)/components';
-import { useEffect } from 'react';
-import { getCookie } from 'cookies-next';
-import { useMe, useOpponent } from '@/hooks';
-import { useRouter } from 'next/navigation';
-import { useUserStore } from '@/stores';
 
 export default function Page() {
-    const router = useRouter();
-    const userStore = useUserStore(({ setUser, setOpponent }) => ({ setUser, setOpponent }));
-
-    useEffect(() => {
-        const token = getCookie('access_token');
-        if (token) {
-            void useMe(userStore.setUser);
-            void useOpponent(userStore.setOpponent);
-        } else {
-            router.replace('/login');
-        }
-    }, []);
-
     return (
         <Box h="100dvh" p="50px 0 152px" overflow="hidden">
             <Stack gap="24px" maxH="100%" p="43px 24px 19px" overflow="hidden auto">
