@@ -1,4 +1,4 @@
-import { Gallery, Send } from '@/assets';
+import { GalleryIcon, SendIcon } from '@/assets';
 import { Box, Button, ButtonProps, Flex, Input, InputProps } from '@chakra-ui/react';
 
 export interface ChatInputProps {
@@ -22,11 +22,11 @@ export default function ChatInput({ galleryButtonProps, inputProps, sendButtonPr
                 w="100%"
             >
                 <Button pointerEvents="auto" {...galleryButtonProps}>
-                    <Gallery />
+                    <GalleryIcon />
                 </Button>
                 <Input {...inputProps} _focusVisible={{ outline: 'none' }} w="100%" />
                 <Button ml="auto" {...sendButtonProps}>
-                    <Send />
+                    <SendIcon />
                 </Button>
             </Flex>
         </Box>
