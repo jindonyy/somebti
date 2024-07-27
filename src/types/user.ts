@@ -32,7 +32,7 @@ export type User = {
     userName: string;
     mbti: MBTI | null;
     gender: Gender | null;
-    birth: Date | string | null;
+    birth?: string | null;
     job?: string;
     siblings?: string;
     interest?: string;
@@ -44,9 +44,11 @@ export type Opponent = {
     userName: string;
     mbti: MBTI | null;
     gender: Gender | null;
-    birth: Date | null;
-    job?: string;
-    siblings?: string;
-    interest?: string;
-    datingExperience?: string;
+    birth?: string | null;
+    relation?: string;
+    knownPeriod?: string;
+    firstMeetingReason?: string;
+    meetingCount?: string;
+    meetingFrequency?: string;
+    contactPattern?: string;
 };

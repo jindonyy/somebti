@@ -41,7 +41,12 @@ export default function Page() {
     const router = useRouter();
     const [canNext, setCanNext] = useState(false);
     const [value, setValue] = useState<Record<string, string> | null>(null);
-    const userStore = useUserStore(({ user, opponent, setOpponent }) => ({ user, opponent, setOpponent }));
+    const userStore = useUserStore(({ user, opponent, setOpponent, setUser }) => ({
+        user,
+        opponent,
+        setOpponent,
+        setUser,
+    }));
     const { activeStep, setActiveStep } = useSteps({
         index: 0,
         count: steps.length,
@@ -57,9 +62,14 @@ export default function Page() {
 
     const handleSignUp = async () => {
         try {
-            const { token } = await clientSignUp({ user: userStore.user, opponent: userStore.opponent });
+            const { token, user, opponent } = await clientSignUp({
+                user: userStore.user,
+                opponent: userStore.opponent,
+            });
             if (token) {
-                setCookie('access_token', token.access_token);
+                setCookie('access_token', token);
+                userStore.setUser(user);
+                userStore.setOpponent(opponent);
                 router.replace('/');
             }
         } catch (error) {

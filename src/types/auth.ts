@@ -9,14 +9,14 @@ export type KakaoToken = {
     refresh_token_expires_in: number;
 };
 
-export type AuthToken = {
-    access_token: string;
-};
-
 export type LoginResponse = {
-    token: AuthToken | null;
+    token: string | null;
     user: User | null;
     opponent: Opponent | null;
 };
 
-export type SignUpResponse = LoginResponse;
+export type SignUpResponse = {
+    token: string;
+    user: User;
+    opponent: Opponent;
+};

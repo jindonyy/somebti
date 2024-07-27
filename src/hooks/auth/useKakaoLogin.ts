@@ -75,7 +75,7 @@ export const useKakaoLogin = () => {
                 const kakaoUserData = await getKaKaoUserData(kakaoAccessToken);
                 const { user, opponent, token } = await clientLogin(`${kakaoUserData.id}`);
                 if (user && opponent && token) {
-                    setCookie('access_token', token.access_token);
+                    setCookie('access_token', token);
                     userStore.setUser(user);
                     userStore.setOpponent(opponent);
                     router.replace('/');
