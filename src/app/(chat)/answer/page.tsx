@@ -5,8 +5,8 @@ import { ActionButton, AIChat, MyChat, OtherChat } from '@/app/(chat)/components
 
 export default async function Page() {
     return (
-        <Box h="100dvh" p="74px 0 152px" overflow="hidden">
-            <Stack gap="24px" maxH="100%" p="19px 24px" overflow="hidden auto">
+        <Box h="100dvh" p="50px 0 152px" overflow="hidden">
+            <Stack gap="24px" maxH="100%" p="43px 24px 19px" overflow="hidden auto">
                 <AIChat text="'안녕하세요! 제훈님의 최근 메세지를 입력해주시면 답장을 추천해드릴게요.'" />
                 <OtherChat userName="제훈" text="'난 이제 퇴근! 모해?'" />
                 <AIChat text="'상대방의 메시지에 대한 답장으로 두 가지 예시를 제안할게요. 하나는 조금 더 캐주얼하고, 다른 하나는 좀 더 관심을 표현하는 방식으로 해보겠습니다." />

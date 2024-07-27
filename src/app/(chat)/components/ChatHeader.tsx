@@ -17,7 +17,7 @@ export default function ChatHeader(props: Props) {
             top="10px"
             left="50%"
             justify="space-between"
-            width="calc(420px - 48px)"
+            width="min(calc(100% - 48px), calc(420px - 48px))"
             p="13px"
             bg="white"
             rounded="24px"
