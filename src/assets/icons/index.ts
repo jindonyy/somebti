@@ -1,4 +1,5 @@
 export { default as PrevArrowButtonIcon } from './prev-arrow-button.svg';
+export { default as ArrowRightIcon } from './ic-arrow-right.svg';
 export { default as AnswerOnIcon } from './answer-on.svg';
 export { default as AnswerOffIcon } from './answer-off.svg';
 export { default as ConsultingOnIcon } from './consulting-on.svg';
