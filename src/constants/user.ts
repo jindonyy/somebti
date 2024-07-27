@@ -23,5 +23,5 @@ export const MBTI = {
     ISFP: 'ISFP',
     INFJ: 'INFJ',
     INFP: 'INFP',
-};
+} as const;
 export type MBTI = EnumValues<typeof MBTI>;

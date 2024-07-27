@@ -10,37 +10,49 @@ import {
     ProfileOffIcon,
     ProfileOnIcon,
 } from '@/assets';
-import { Flex } from '@chakra-ui/react';
+import { Flex, IconButton } from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMemo } from 'react';
 
 export default function Navigation() {
     const path = usePathname();
 
-    const isAnswerPage = useMemo(() => path === '/' ?? path.startsWith('/answer'), [path]);
-    const isFirstTalkPage = useMemo(() => path.startsWith('/first_talk'), [path]);
-    const isConsultingPage = useMemo(() => path.startsWith('/consulting'), [path]);
-    const isProfilePage = useMemo(() => path.startsWith('/profile'), [path]);
+    const isAnswerPage = path === '/' || path.startsWith('/answer');
+    const isFirstTalkPage = path.startsWith('/first_talk');
+    const isConsultingPage = path.startsWith('/consulting');
+    const isProfilePage = path.startsWith('/profile');
+
+    const handleAlert = () => {
+        alert('준비 중입니다. 잠시만 기다려주세요! :)');
+    };
 
     return (
-        <Flex
-            py="12px"
-            px="24px"
-            pt="6px"
-            pb="21px"
-            bg="white"
-            w="100%"
-            justify="space-between"
-            position="fixed"
-            bottom={0}
-            zIndex={100}
-            maxW="420px"
-        >
+        <Flex py="12px" px="24px" pt="6px" pb="21px" bg="white" w="100%" justify="space-between">
             <Link href="/answer">{isAnswerPage ? <AnswerOnIcon /> : <AnswerOffIcon />}</Link>
-            <Link href="/first_talk">{isFirstTalkPage ? <FirstTalkOnIcon /> : <FirstTalkOffIcon />}</Link>
-            <Link href="/consulting">{isConsultingPage ? <ConsultingOnIcon /> : <ConsultingOffIcon />}</Link>
-            <Link href="/profile">{isProfilePage ? <ProfileOnIcon /> : <ProfileOffIcon />}</Link>
+            <IconButton
+                onClick={handleAlert}
+                bg="transparent"
+                _hover={{ bg: 'transparent' }}
+                aria-label="navigation button"
+            >
+                {isFirstTalkPage ? <FirstTalkOnIcon /> : <FirstTalkOffIcon />}
+            </IconButton>
+            <IconButton
+                onClick={handleAlert}
+                bg="transparent"
+                _hover={{ bg: 'transparent' }}
+                aria-label="navigation button"
+            >
+                {isConsultingPage ? <ConsultingOnIcon /> : <ConsultingOffIcon />}
+            </IconButton>
+            <IconButton
+                onClick={handleAlert}
+                bg="transparent"
+                _hover={{ bg: 'transparent' }}
+                aria-label="navigation button"
+            >
+                {isProfilePage ? <ProfileOnIcon /> : <ProfileOffIcon />}
+            </IconButton>
         </Flex>
     );
 }
