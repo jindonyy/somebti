@@ -52,3 +52,11 @@ export type Opponent = {
     meetingFrequency?: string;
     contactPattern?: string;
 };
+
+export type MeResponse = {
+    user: User;
+};
+
+export type OpponentResponse = {
+    opponent: Opponent;
+};
