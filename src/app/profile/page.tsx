@@ -35,7 +35,7 @@ export default function Page() {
                 lineHeight="23.4px"
                 mb="19px"
             >
-                내정보
+                내 정보
             </Box>
             <Box px="24px" w="100%">
                 <Profile />

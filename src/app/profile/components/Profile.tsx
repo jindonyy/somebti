@@ -5,6 +5,7 @@ import { Box, Text } from '@chakra-ui/react';
 import { Avatar } from '@chakra-ui/react';
 import { Avatar as AvatarIcon } from '@/assets';
 import dayjs from 'dayjs';
+import { GENDER } from '@/constants/user';
 
 export default function Profile() {
     const userStore = useUserStore(({ user }) => ({ user }));
@@ -21,9 +22,9 @@ export default function Profile() {
                 <Text as="b" fontSize="24px" fontWeight="600">
                     {userStore.user.username}
                 </Text>
-                <Text>
-                    {userStore.user.gender ?? '여'}
-                    {userStore.user.birth} / {dayjs(userStore.user.birth ?? new Date()).format('YYYY/MM/DD')}
+                <Text color="#aaa">
+                    {GENDER[userStore.user.gender ?? 'FEMALE'].label} ·
+                    {dayjs(userStore.user.birth ?? new Date()).format('YYYY/MM/DD')}
                 </Text>
             </Box>
         </Box>
