@@ -17,7 +17,7 @@ export default function BirthSection(props: Props) {
     const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         if (event.target.value) {
             setCanNext(true);
-            setValue({ [property]: event.target.value });
+            setValue({ [property]: dayjs(event.target.value).toISOString() });
         } else {
             setCanNext(false);
         }
