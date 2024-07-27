@@ -19,7 +19,7 @@ export default function Profile() {
             />
             <Box ml="24px">
                 <Text as="b" fontSize="24px" fontWeight="600">
-                    {userStore.user.userName}
+                    {userStore.user.username}
                 </Text>
                 <Text>
                     {userStore.user.gender ?? '여'}

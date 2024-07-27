@@ -3,12 +3,12 @@ import { Avatar as AvatarIcon } from '@/assets';
 import { MBTI } from '@/constants/user';
 
 interface Props {
-    userName: string;
+    username: string;
     mbti: MBTI;
 }
 
 export default function ChatHeader(props: Props) {
-    const { userName, mbti } = props;
+    const { username, mbti } = props;
 
     return (
         <Flex
@@ -29,7 +29,7 @@ export default function ChatHeader(props: Props) {
             <Center gap="4px">
                 <Avatar icon={<AvatarIcon />} width="36px" height="36px" />
                 <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1">
-                    {userName}
+                    {username}
                 </Text>
                 <Text
                     as="span"

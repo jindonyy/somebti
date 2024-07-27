@@ -22,7 +22,7 @@ export default function NameSection(props: Props) {
     };
 
     useEffect(() => {
-        if (!user.userName) {
+        if (!user.username) {
             setCanNext(false);
         }
     }, []);
@@ -37,7 +37,7 @@ export default function NameSection(props: Props) {
             px="16px"
             bg="white"
             rounded="12px"
-            defaultValue={user.userName}
+            defaultValue={user.username}
         />
     );
 }

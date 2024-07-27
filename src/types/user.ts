@@ -29,7 +29,7 @@ export type KakaoUser = {
 export type User = {
     email?: string | null;
     kakaoId: string;
-    userName: string;
+    username: string;
     mbti: MBTI | null;
     gender: Gender | null;
     birth?: string | null;
@@ -41,7 +41,7 @@ export type User = {
 };
 
 export type Opponent = {
-    userName: string;
+    username: string;
     mbti: MBTI | null;
     gender: Gender | null;
     birth?: string | null;

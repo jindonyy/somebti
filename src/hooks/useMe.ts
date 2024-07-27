@@ -1,10 +1,9 @@
 import { clientMe } from '@/apis/user';
-import { useUserStore } from '@/stores';
+import { User } from '@/types';
 
-export const useMe = async () => {
-    const userStore = useUserStore(({ setUser }) => ({ setUser }));
+export const useMe = async (setUser: (user: User) => void) => {
     try {
         const { user } = await clientMe();
-        userStore.setUser(user);
+        setUser(user);
     } catch {}
 };

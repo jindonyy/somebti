@@ -1,14 +1,32 @@
-'use server';
+'use client';
 
 import { Box, Center, Stack } from '@chakra-ui/react';
 import { ActionButton, AIChat, MyChat, OpponentChat } from '@/app/(chat)/components';
+import { useEffect } from 'react';
+import { getCookie } from 'cookies-next';
+import { useMe, useOpponent } from '@/hooks';
+import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/stores';
 
-export default async function Page() {
+export default function Page() {
+    const router = useRouter();
+    const userStore = useUserStore(({ setUser, setOpponent }) => ({ setUser, setOpponent }));
+
+    useEffect(() => {
+        const token = getCookie('access_token');
+        if (token) {
+            void useMe(userStore.setUser);
+            void useOpponent(userStore.setOpponent);
+        } else {
+            router.replace('/login');
+        }
+    }, []);
+
     return (
         <Box h="100dvh" p="50px 0 152px" overflow="hidden">
             <Stack gap="24px" maxH="100%" p="43px 24px 19px" overflow="hidden auto">
                 <AIChat text="'안녕하세요! 제훈님의 최근 메세지를 입력해주시면 답장을 추천해드릴게요.'" />
-                <OpponentChat userName="제훈" text="'난 이제 퇴근! 모해?'" />
+                <OpponentChat username="제훈" text="'난 이제 퇴근! 모해?'" />
                 <AIChat text="'상대방의 메시지에 대한 답장으로 두 가지 예시를 제안할게요. 하나는 조금 더 캐주얼하고, 다른 하나는 좀 더 관심을 표현하는 방식으로 해보겠습니다." />
                 <Stack gap="12px">
                     <MyChat

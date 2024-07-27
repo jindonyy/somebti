@@ -2,14 +2,14 @@ import { Avatar as AvatarIcon } from '@/assets';
 import { Avatar, Flex, Stack, Text } from '@chakra-ui/react';
 
 interface Props {
-    userName: string;
+    username: string;
     profileImageUrl?: string;
     text: string;
 }
 
 export default function OpponentChat(props: Props) {
     const {
-        userName,
+        username,
         profileImageUrl,
         text = '안녕하세요! 제훈님의 최근 메세지를 입력해주시면 답장을 추천해드릴게요.',
     } = props;
@@ -20,7 +20,7 @@ export default function OpponentChat(props: Props) {
                 <Avatar icon={<AvatarIcon />} src={profileImageUrl} width="36px" height="36px" />
                 <Stack gap="4px">
                     <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1">
-                        {userName}
+                        {username}
                     </Text>
                     <Text
                         dangerouslySetInnerHTML={{ __html: text }}

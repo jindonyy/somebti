@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const steps = [
     {
-        property: 'userName',
+        property: 'username',
         title: '이름을 입력해주세요',
         description: '서비스 내에서 사용됩니다',
         component: NameSection,
@@ -38,7 +38,7 @@ const steps = [
 export default function Page() {
     const router = useRouter();
     const userStore = useUserStore(({ setUser, user }) => ({ setUser, user }));
-    const [canNext, setCanNext] = useState(userStore.user.userName ? true : false);
+    const [canNext, setCanNext] = useState(userStore.user.username ? true : false);
     const [value, setValue] = useState<Record<string, string> | null>(null);
     const { activeStep, setActiveStep } = useSteps({
         index: 0,

@@ -11,7 +11,7 @@ import { clientSignUp } from '@/apis/auth';
 
 const steps = [
     {
-        property: 'userName',
+        property: 'username',
         title: '상대의 이름을 입력해주세요',
         description: '서비스 내에서 사용됩니다',
         component: NameSection,

@@ -5,7 +5,6 @@ import { getCookie } from 'cookies-next';
 export const clientMe = async () => {
     const response = await clientFetch<MeResponse>(`/auth/me`, {
         method: 'GET',
-        credentials: 'include',
     });
 
     return response;
@@ -17,7 +16,6 @@ export const clientOpponent = async () => {
         headers: {
             Cookie: getCookie('access_token') ?? '',
         },
-        credentials: 'include',
     });
 
     return response;

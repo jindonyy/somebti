@@ -10,7 +10,7 @@ export interface UserStore {
 
 const initialUser = {
     kakaoId: '',
-    userName: '',
+    username: '',
     email: null,
     birth: null,
     gender: null,
@@ -19,7 +19,7 @@ const initialUser = {
 };
 
 const initialOpponent = {
-    userName: '',
+    username: '',
     birth: null,
     gender: null,
     mbti: null,

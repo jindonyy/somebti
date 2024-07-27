@@ -1,10 +1,9 @@
 import { clientOpponent } from '@/apis/user';
-import { useUserStore } from '@/stores';
+import { Opponent } from '@/types';
 
-export const useOpponent = async () => {
-    const userStore = useUserStore(({ setOpponent }) => ({ setOpponent }));
+export const useOpponent = async (setOpponent: (opponent: Opponent) => void) => {
     try {
         const { opponent } = await clientOpponent();
-        userStore.setOpponent(opponent);
+        setOpponent(opponent);
     } catch {}
 };
