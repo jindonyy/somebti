@@ -18,3 +18,11 @@ export const clientSignUp = async (params: { user: User; opponent: Opponent }) =
 
     return response;
 };
+
+export const clientLeave = async () => {
+    const response = await clientFetch(`/auth/leave`, {
+        method: 'DELETE',
+    });
+
+    return response;
+};
