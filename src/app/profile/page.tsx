@@ -5,21 +5,20 @@ import Profile from './components/Profile';
 import { BottomButton } from '@/components';
 import { clientLeave } from '@/apis/auth';
 import { useRouter } from 'next/navigation';
-import { getCookie, setCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 
 export default function Page() {
     const { replace } = useRouter();
 
     const handleLeave = async () => {
         await clientLeave();
-
         replace('/login');
     };
 
     const handleLogout = async () => {
         const token = getCookie('access_token');
         if (token) {
-            setCookie('access_token', null);
+            deleteCookie('access_token');
             replace('/login');
         }
     };
