@@ -4,34 +4,26 @@ import { useUserStore } from '@/stores';
 import { Box, Text } from '@chakra-ui/react';
 import { Avatar } from '@chakra-ui/react';
 import { Avatar as AvatarIcon } from '@/assets';
-import { useMemo } from 'react';
-
-function formatDate(birth: string | Date): string {
-    const date = new Date(birth);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-
-    return `${year}/${month}/${day}`;
-}
+import dayjs from 'dayjs';
 
 export default function Profile() {
-    const { user } = useUserStore();
-    const birth = useMemo(() => {
-        return formatDate(user.birth!);
-    }, [user]);
+    const userStore = useUserStore(({ user }) => ({ user }));
 
     return (
         <Box display="flex" alignItems="center">
-            {user.profileImageUrl ? (
-                <Avatar icon={<AvatarIcon />} src={user.profileImageUrl} width="90px" height="90px" />
-            ) : (
-                <Avatar width="90px" height="90px" />
-            )}
+            <Avatar
+                icon={<AvatarIcon width="90px" height="90px" />}
+                src={userStore.user.profileImageUrl ?? ''}
+                width="90px"
+                height="90px"
+            />
             <Box ml="24px">
-                <Text>{'홍길동'}</Text>
+                <Text as="b" fontSize="24px" fontWeight="600">
+                    {userStore.user.userName}
+                </Text>
                 <Text>
-                    {user.gender ?? '남'} / {birth}
+                    {userStore.user.gender ?? '여'}
+                    {userStore.user.birth} / {dayjs(userStore.user.birth ?? new Date()).format('YYYY/MM/DD')}
                 </Text>
             </Box>
         </Box>

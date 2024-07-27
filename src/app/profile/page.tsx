@@ -7,7 +7,7 @@ import { clientLeave } from '@/apis/auth';
 import { useRouter } from 'next/navigation';
 import { getCookie, setCookie } from 'cookies-next';
 
-export default async function Page() {
+export default function Page() {
     const { replace } = useRouter();
 
     const handleLeave = async () => {
