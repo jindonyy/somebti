@@ -12,7 +12,7 @@ export const useKakaoLogin = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const authorizationCode = searchParams?.get('code');
-    const userStore = useUserStore(({ user, setUser }) => ({ user, setUser }));
+    const userStore = useUserStore(({ user, setUser, setOther }) => ({ user, setUser, setOther }));
     const initKakao = () => {
         if (window.Kakao && !window.Kakao.isInitialized()) {
             window.Kakao.init(`${process.env.NEXT_PUBLIC_KAKAO_REST_JS_KEY}`);
@@ -73,10 +73,11 @@ export const useKakaoLogin = () => {
                 }
 
                 const kakaoUserData = await getKaKaoUserData(kakaoAccessToken);
-                const { user, token } = await clientLogin(`${kakaoUserData.id}`);
-                if (user && token) {
+                const { user, other, token } = await clientLogin(`${kakaoUserData.id}`);
+                if (user && other && token) {
                     setCookie('access_token', token.access_token);
                     userStore.setUser(user);
+                    userStore.setOther(other);
                     router.replace('/');
                 } else {
                     userStore.setUser({

@@ -1,4 +1,4 @@
-import { User } from './user';
+import { Other, User } from './user';
 
 export type KakaoToken = {
     access_token: string;
@@ -16,9 +16,7 @@ export type AuthToken = {
 export type LoginResponse = {
     token: AuthToken | null;
     user: User | null;
+    other: Other | null;
 };
 
-export type SignUpResponse = {
-    token: AuthToken | null;
-    user: User | null;
-};
+export type SignUpResponse = LoginResponse;

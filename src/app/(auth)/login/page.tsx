@@ -7,7 +7,7 @@ import { Title } from '@/components';
 
 export default async function Page() {
     return (
-        <Stack as="main" justify="space-between" padding="53px 24px 66px">
+        <Stack as="main" justify="space-between" gap="30px" padding="53px 24px 40px">
             <Stack gap="8px">
                 <Symbol width="40px" height="40px" />
                 <Title

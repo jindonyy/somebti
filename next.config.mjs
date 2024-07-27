@@ -26,7 +26,7 @@ const nextConfig = {
         return config;
     },
     async rewrites() {
-        return [{ source: '/', destination: '/consulting' }];
+        return [{ source: '/', destination: '/answer' }];
     },
 };
 

@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default async function Page() {
     return (
-        <Stack as="main" justify="space-between" padding="118px 24px 66px">
+        <Stack as="main" justify="space-between" gap="30px" padding="118px 24px 40px">
             <Stack gap="8px">
                 <Title
                     title="상대의 정보도 입력해보세요"
@@ -19,9 +19,9 @@ export default async function Page() {
                 <BottomButton as={Link} href="/other/step">
                     다음
                 </BottomButton>
-                <BottomButton as={Link} href="/" bg="transparent" _hover={{ bg: 'transparent' }} boxShadow="none">
+                {/* <BottomButton as={Link} href="/" bg="transparent" _hover={{ bg: 'transparent' }} boxShadow="none">
                     건너뛰기
-                </BottomButton>
+                </BottomButton> */}
             </Stack>
         </Stack>
     );

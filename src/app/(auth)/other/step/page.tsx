@@ -5,6 +5,9 @@ import { BirthSection, GenderSection, MBTISection, NameSection, Progress } from 
 import { BottomButton, Title } from '@/components';
 import { useState } from 'react';
 import { useUserStore } from '@/stores';
+import { useRouter } from 'next/navigation';
+import { setCookie } from 'cookies-next';
+import { clientSignUp } from '@/apis/auth';
 
 const steps = [
     {
@@ -35,9 +38,10 @@ const steps = [
 ];
 
 export default function Page() {
+    const router = useRouter();
     const [canNext, setCanNext] = useState(false);
     const [value, setValue] = useState<Record<string, string> | null>(null);
-    const userStore = useUserStore(({ setOther, other }) => ({ setOther, other }));
+    const userStore = useUserStore(({ user, other, setOther }) => ({ user, other, setOther }));
     const { activeStep, setActiveStep } = useSteps({
         index: 0,
         count: steps.length,
@@ -51,24 +55,25 @@ export default function Page() {
         setActiveStep(activeStep - 1);
     };
 
-    const handleSubmit = async () => {
-        // try {
-        //     const { token, user } = await clientSignUp(userStore.other);
-        //     if (user && token) {
-        //         userStore.setOther(user);
-        //         setCookie('access_token', token.access_token);
-        //     }
-        // } catch (error) {
-        //     console.error(error);
-        // }
+    const handleSignUp = async () => {
+        try {
+            const { token } = await clientSignUp({ user: userStore.user, other: userStore.other });
+            if (token) {
+                setCookie('access_token', token.access_token);
+                router.replace('/');
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const handleNext = () => {
+        userStore.setOther({ ...userStore.other, ...value });
+        setValue(null);
+
         if (isLastStep) {
-            void handleSubmit();
+            void handleSignUp();
         } else {
-            userStore.setOther({ ...userStore.other, ...value });
-            setValue(null);
             setActiveStep(activeStep + 1);
         }
     };
@@ -82,7 +87,7 @@ export default function Page() {
                 onNext={handleNext}
                 skip={currentStep.skip}
             />
-            <Stack flexGrow="1" justify="space-between" p="0px 24px 66px">
+            <Stack flexGrow="1" justify="space-between" gap="30px" padding="0px 24px 40px">
                 <Stack flexGrow="1" pt="52px" gap="26px">
                     <Title title={currentStep.title || ''} description={currentStep.description} />
                     <Stack as="form">

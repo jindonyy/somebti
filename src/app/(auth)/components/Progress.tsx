@@ -15,7 +15,7 @@ export default function Progress(props: Props) {
     const { stepsSize, activeStep, skip = false, onPrev, onNext } = props;
 
     return (
-        <Box width="100%" padding="14px 10px 0" bgColor="#fff">
+        <Box width="100%" padding="10px 10px 0" bgColor="#fff">
             <ChakraProgress
                 value={(100 / stepsSize) * (activeStep + 1)}
                 width="100%"

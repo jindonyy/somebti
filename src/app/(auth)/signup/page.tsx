@@ -5,8 +5,6 @@ import { BirthSection, GenderSection, MBTISection, NameSection, Progress } from 
 import { BottomButton, Title } from '@/components';
 import { useState } from 'react';
 import { useUserStore } from '@/stores';
-import { clientSignUp } from '@/apis/auth';
-import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 
 const steps = [
@@ -55,26 +53,13 @@ export default function Page() {
         setActiveStep(activeStep - 1);
     };
 
-    const handleSignUp = async () => {
-        try {
-            const { token, user } = await clientSignUp(userStore.user);
-            if (user && token) {
-                userStore.setUser(user);
-                setCookie('access_token', token.access_token);
-                router.replace('/other');
-            }
-        } catch (error: any) {
-            console.error(error);
-            if (error?.message) alert(error.message);
-        }
-    };
-
     const handleNext = () => {
+        userStore.setUser({ ...userStore.user, ...value });
+        setValue(null);
+
         if (isLastStep) {
-            void handleSignUp();
+            router.replace('/other');
         } else {
-            userStore.setUser({ ...userStore.user, ...value });
-            setValue(null);
             setActiveStep(activeStep + 1);
         }
     };
@@ -88,7 +73,7 @@ export default function Page() {
                 onNext={handleNext}
                 skip={currentStep.skip}
             />
-            <Stack flexGrow="1" justify="space-between" p="0px 24px 66px">
+            <Stack flexGrow="1" justify="space-between" gap="30px" p="0px 24px 40px">
                 <Stack flexGrow="1" pt="52px" gap="26px">
                     <Title title={currentStep.title || ''} description={currentStep.description} />
                     <Stack as="form">
