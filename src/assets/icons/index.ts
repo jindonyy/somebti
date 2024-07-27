@@ -8,4 +8,5 @@ export { default as FirstTalkOffIcon } from './first-talk-off.svg';
 export { default as ProfileOnIcon } from './profile-on.svg';
 export { default as ProfileOffIcon } from './profile-off.svg';
 export { default as GalleryIcon } from './gallery.svg';
-export { default as SendIcon } from './send.svg';
+export { default as SendOnIcon } from './send-on.svg';
+export { default as SendOffIcon } from './send-off.svg';
