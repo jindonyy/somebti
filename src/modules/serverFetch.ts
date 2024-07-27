@@ -1,11 +1,14 @@
+import { getCookie } from 'cookies-next';
+
 export const serverFetch = async <T>(...args: Parameters<typeof fetch>) => {
+    const token = getCookie('access_token');
     const url = (process.env.NEXT_PUBLIC_API_DOMAIN || '') + args[0];
     const options = {
         ...args[1],
         headers: {
             'Content-Type': 'application/json',
             ...args[1]?.headers,
-            // Authorization: `Bearer ${token}`,
+            Authorization: token ? `Bearer ${token}` : '',
         },
     };
 
