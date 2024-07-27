@@ -63,6 +63,8 @@ export const useKakaoLogin = () => {
     }, []);
 
     useEffect(() => {
+        if (!authorizationCode) return;
+
         try {
             const login = async () => {
                 let kakaoAccessToken = JSON.stringify(getCookie('kakao_access_token'));
