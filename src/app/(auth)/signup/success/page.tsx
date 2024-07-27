@@ -8,7 +8,7 @@ import Link from 'next/link';
 export default async function Page() {
     return (
         <Center as="main" position="relative" padding="0px 24px">
-            <Center flexDir="column" gap="16px">
+            <Center flexDir="column" gap="12px">
                 <Symbol width="40px" height="40px" />
                 <Title
                     title="썸BTI에서는
@@ -16,7 +16,7 @@ export default async function Page() {
                     이런 것이 가능해요"
                     textAlign="center"
                 />
-                <Stack gap="20px" maxW="260px" bg="white" padding="20px" rounded="20px" fontSize="14px">
+                <Stack gap="20px" maxW="260px" mt="4px" bg="white" padding="20px" rounded="20px" fontSize="14px">
                     <Text>
                         좋아하는 사람이 있는데,
                         <br />
