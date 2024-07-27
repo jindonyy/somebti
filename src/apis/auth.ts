@@ -1,5 +1,5 @@
 import { clientFetch } from '@/modules';
-import { LoginResponse, Other, SignUpResponse, User } from '@/types';
+import { LoginResponse, Opponent, SignUpResponse, User } from '@/types';
 
 export const clientLogin = async (id: string) => {
     const response = await clientFetch<LoginResponse>(`/auth/login`, {
@@ -10,7 +10,7 @@ export const clientLogin = async (id: string) => {
     return response;
 };
 
-export const clientSignUp = async (params: { user: User; other: Other }) => {
+export const clientSignUp = async (params: { user: User; opponent: Opponent }) => {
     const response = await clientFetch<SignUpResponse>(`/auth/signup`, {
         method: 'POST',
         body: JSON.stringify(params),

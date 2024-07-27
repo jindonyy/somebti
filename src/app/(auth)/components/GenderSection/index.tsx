@@ -2,10 +2,10 @@ import { Stack, useRadioGroup } from '@chakra-ui/react';
 import { GENDER } from '@/constants/user';
 import GenderCard from './GenderCard';
 import { useEffect } from 'react';
-import { Other, User } from '@/types';
+import { Opponent, User } from '@/types';
 
 interface Props {
-    user: User | Other;
+    user: User | Opponent;
     property: string;
     setCanNext: (canNext: boolean) => void;
     setValue: (value: Record<string, string>) => void;

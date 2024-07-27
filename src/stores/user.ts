@@ -1,11 +1,11 @@
-import { Other, User } from '@/types/user';
+import { Opponent, User } from '@/types/user';
 import { create } from 'zustand';
 
 export interface UserStore {
     user: User;
-    other: Other;
+    opponent: Opponent;
     setUser: (user: User) => void;
-    setOther: (other: Other) => void;
+    setOpponent: (opponent: Opponent) => void;
 }
 
 const initialUser = {
@@ -18,7 +18,7 @@ const initialUser = {
     profileImageUrl: null,
 };
 
-const initialOther = {
+const initialOpponent = {
     userName: '',
     birth: null,
     gender: null,
@@ -27,7 +27,7 @@ const initialOther = {
 
 export const useUserStore = create<UserStore>((set) => ({
     user: initialUser,
-    other: initialOther,
+    opponent: initialOpponent,
     setUser: (user: User) => set(() => ({ user })),
-    setOther: (other: Other) => set(() => ({ other })),
+    setOpponent: (opponent: Opponent) => set(() => ({ opponent })),
 }));

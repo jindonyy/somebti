@@ -1,10 +1,10 @@
-import { Other, User } from '@/types';
+import { Opponent, User } from '@/types';
 import { Input } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { ChangeEventHandler, useEffect } from 'react';
 
 interface Props {
-    user: User | Other;
+    user: User | Opponent;
     property: string;
     setCanNext: (canNext: boolean) => void;
     setValue: (value: Record<string, string>) => void;

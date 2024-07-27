@@ -58,7 +58,7 @@ export default function Page() {
         setValue(null);
 
         if (isLastStep) {
-            router.replace('/other');
+            router.replace('/opponent');
         } else {
             setActiveStep(activeStep + 1);
         }

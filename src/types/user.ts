@@ -40,7 +40,7 @@ export type User = {
     datingExperience?: string;
 };
 
-export type Other = {
+export type Opponent = {
     userName: string;
     mbti: MBTI | null;
     gender: Gender | null;

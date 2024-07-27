@@ -41,7 +41,7 @@ export default function Page() {
     const router = useRouter();
     const [canNext, setCanNext] = useState(false);
     const [value, setValue] = useState<Record<string, string> | null>(null);
-    const userStore = useUserStore(({ user, other, setOther }) => ({ user, other, setOther }));
+    const userStore = useUserStore(({ user, opponent, setOpponent }) => ({ user, opponent, setOpponent }));
     const { activeStep, setActiveStep } = useSteps({
         index: 0,
         count: steps.length,
@@ -57,7 +57,7 @@ export default function Page() {
 
     const handleSignUp = async () => {
         try {
-            const { token } = await clientSignUp({ user: userStore.user, other: userStore.other });
+            const { token } = await clientSignUp({ user: userStore.user, opponent: userStore.opponent });
             if (token) {
                 setCookie('access_token', token.access_token);
                 router.replace('/');
@@ -68,7 +68,7 @@ export default function Page() {
     };
 
     const handleNext = () => {
-        userStore.setOther({ ...userStore.other, ...value });
+        userStore.setOpponent({ ...userStore.opponent, ...value });
         setValue(null);
 
         if (isLastStep) {
@@ -92,7 +92,7 @@ export default function Page() {
                     <Title title={currentStep.title || ''} description={currentStep.description} />
                     <Stack as="form">
                         <Component
-                            user={userStore.other}
+                            user={userStore.opponent}
                             property={currentStep.property}
                             setCanNext={setCanNext}
                             setValue={setValue}

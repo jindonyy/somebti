@@ -7,7 +7,7 @@ interface Props {
     text: string;
 }
 
-export default function OtherChat(props: Props) {
+export default function OpponentChat(props: Props) {
     const {
         userName,
         profileImageUrl,

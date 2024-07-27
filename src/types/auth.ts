@@ -1,4 +1,4 @@
-import { Other, User } from './user';
+import { Opponent, User } from './user';
 
 export type KakaoToken = {
     access_token: string;
@@ -16,7 +16,7 @@ export type AuthToken = {
 export type LoginResponse = {
     token: AuthToken | null;
     user: User | null;
-    other: Other | null;
+    opponent: Opponent | null;
 };
 
 export type SignUpResponse = LoginResponse;

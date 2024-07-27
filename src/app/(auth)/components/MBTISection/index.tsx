@@ -1,10 +1,10 @@
 import { Grid, Stack, useRadioGroup } from '@chakra-ui/react';
 import MBTICard from './MBTICard';
 import { useEffect, useRef } from 'react';
-import { User, Other } from '@/types';
+import { User, Opponent } from '@/types';
 
 interface Props {
-    user: User | Other;
+    user: User | Opponent;
     property: string;
     setCanNext: (canNext: boolean) => void;
     setValue: (value: Record<string, string>) => void;

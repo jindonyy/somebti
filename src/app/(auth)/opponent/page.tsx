@@ -16,7 +16,7 @@ export default async function Page() {
                 />
             </Stack>
             <Stack gap="8px">
-                <BottomButton as={Link} href="/other/step">
+                <BottomButton as={Link} href="/opponent/step">
                     다음
                 </BottomButton>
                 {/* <BottomButton as={Link} href="/" bg="transparent" _hover={{ bg: 'transparent' }} boxShadow="none">
