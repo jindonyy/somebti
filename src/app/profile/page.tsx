@@ -13,14 +13,14 @@ export default function Page() {
     const handleLeave = async () => {
         await clientLeave();
 
-        replace('/');
+        replace('/login');
     };
 
     const handleLogout = async () => {
         const token = getCookie('access_token');
         if (token) {
             setCookie('access_token', null);
-            replace('/');
+            replace('/login');
         }
     };
 
