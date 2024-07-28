@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: '썸BTI',
-    description: '썸BTI 💘 너도 연애 할 수 있어!',
+    description: '썸BTI 💘 너도 연애 잘 할 수 있어!',
 };
 
 export default function RootLayout({
