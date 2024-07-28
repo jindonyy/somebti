@@ -50,6 +50,29 @@ export default function ChatHeader() {
             overflow="hidden"
         >
             <Center gap="4px">
+                <Avatar icon={<AvatarIcon />} width="36px" height="36px" />
+                {userStore.opponent.username && (
+                    <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1">
+                        {userStore.opponent.username}
+                    </Text>
+                )}
+                {userStore.opponent.mbti && (
+                    <Text
+                        as="span"
+                        p="2px 5px"
+                        bg="#525252"
+                        fontSize="11px"
+                        fontWeight="500"
+                        lineHeight="14px"
+                        color="white"
+                        rounded="8px"
+                    >
+                        {userStore.opponent.mbti}
+                    </Text>
+                )}
+            </Center>
+            <Text>. . . .</Text>
+            <Center gap="4px">
                 <Avatar icon={<AvatarIcon />} src={userStore.user.profileImageUrl ?? ''} width="36px" height="36px" />
                 {userStore.user.username && (
                     <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1">
