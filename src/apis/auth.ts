@@ -1,10 +1,10 @@
 import { clientFetch } from '@/modules';
 import { LoginResponse, Opponent, SignUpResponse, User } from '@/types';
 
-export const clientLogin = async (id: string) => {
+export const clientLogin = async (kakaoId: string) => {
     const response = await clientFetch<LoginResponse>(`/auth/login`, {
         method: 'POST',
-        body: JSON.stringify({ id }),
+        body: JSON.stringify({ kakaoId }),
     });
 
     return response;

@@ -3,7 +3,7 @@
 import { clientLogin } from '@/apis/auth';
 import { useUserStore } from '@/stores';
 import { KakaoToken } from '@/types/auth';
-import { KakaoUser, User } from '@/types/user';
+import { KakaoUser } from '@/types/user';
 import { getCookie, setCookie } from 'cookies-next';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
