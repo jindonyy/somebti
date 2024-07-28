@@ -3,7 +3,7 @@
 import { Box, Center, Stack } from '@chakra-ui/react';
 import { ActionButton, AIChat, ChatInput, MyChat, OpponentChat } from '@/app/(chat)/components';
 import { clientAdditionalRequest, clientGetRecentMessage, clientPostChatReply } from '@/apis/answer';
-import { FormEventHandler, MouseEventHandler, useEffect, useState } from 'react';
+import { FormEventHandler, MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { Chat, ChatType, SenderType } from '@/types/answer';
 import { useUserStore } from '@/stores';
 import { LoadingDots } from '@/components';
@@ -27,7 +27,8 @@ export default function Page() {
     const [chats, setChats] = useState<Chat[]>([initialChat]);
     const [visibleActionButton, setVisibleActionButton] = useState(false);
     const [additionalChatIds, setAdditionalChatIds] = useState<string[]>([]);
-    const [isAILoading, setAILoading] = useState(false);
+    const [isChatLoading, setIsChatLoading] = useState(false);
+    const chatListRef = useRef<HTMLDivElement>(null);
 
     const fetchMessage = async () => {
         const response = await clientGetRecentMessage();
@@ -39,22 +40,20 @@ export default function Page() {
         const formData = new FormData(event.target);
         const inputValue = formData.get('chat') as string;
         if (inputValue) {
-            setAILoading(true);
+            setIsChatLoading(true);
             try {
                 const response = await clientPostChatReply({ chatType: '답장하기', text: inputValue });
                 if (response) {
-                    setAILoading(false);
-                    const newAdditionalIds = response.messages.slice(0, 5).reduce<string[]>((acc, cur) => {
-                        return cur.senderType === 'opponent' || cur.senderType === 'user'
-                            ? [...acc, cur.messageId]
-                            : acc;
-                    }, []);
+                    setIsChatLoading(false);
                     await fetchMessage();
+                    const newAdditionalIds = response.messages
+                        .filter((msg) => msg.senderType === 'opponent' || msg.senderType === 'user')
+                        .map((msg) => msg.messageId);
                     setVisibleActionButton(true);
                     setAdditionalChatIds(newAdditionalIds);
                 }
             } catch {
-                setAILoading(false);
+                setIsChatLoading(false);
             }
         }
     };
@@ -62,19 +61,19 @@ export default function Page() {
     const sendAdditionalRequest: MouseEventHandler<HTMLButtonElement> = async (event) => {
         // @ts-ignore
         const additionalReq: string = event.target.name;
-        setAILoading(true);
+        setIsChatLoading(true);
         try {
             const response = await clientAdditionalRequest({ additionalReq, messageIds: additionalChatIds });
             if (response) {
-                setAILoading(false);
-                setChats([initialChat, ...response.messages.reverse()]);
-                const newAdditionalIds = response.messages.slice(0, 4).reduce<string[]>((acc, cur) => {
-                    return cur.senderType === 'user' ? [...acc, cur.messageId] : acc;
-                }, []);
+                setIsChatLoading(false);
+                await fetchMessage();
+                const newAdditionalIds = response.messages
+                    .filter((msg) => msg.senderType === 'user')
+                    .map((msg) => msg.messageId);
                 setAdditionalChatIds((prev) => [...prev, ...newAdditionalIds]);
             }
         } catch {
-            setAILoading(false);
+            setIsChatLoading(false);
         }
     };
 
@@ -85,10 +84,16 @@ export default function Page() {
         }
     }, [userStore.opponent]);
 
+    useEffect(() => {
+        if (chatListRef?.current) {
+            chatListRef.current.scrollTop = chatListRef.current.scrollHeight;
+        }
+    }, [chats, isChatLoading]);
+
     return (
         <>
             <Box h="100dvh" p="50px 0 152px" overflow="hidden">
-                <Stack gap="24px" maxH="100%" p="43px 24px 19px" overflow="hidden auto">
+                <Stack ref={chatListRef} gap="24px" maxH="100%" p="43px 24px 19px" overflow="hidden auto">
                     {chats.map((chat) => {
                         const Component = components[chat.senderType];
                         if (chat.senderType === 'user') {
@@ -106,20 +111,24 @@ export default function Page() {
                     })}
                     {visibleActionButton && (
                         <Center gap="8px">
-                            <ActionButton isDisabled={isAILoading} onClick={sendAdditionalRequest} text="더 추천해줘" />
                             <ActionButton
-                                isDisabled={isAILoading}
+                                isDisabled={isChatLoading}
+                                onClick={sendAdditionalRequest}
+                                text="더 추천해줘"
+                            />
+                            <ActionButton
+                                isDisabled={isChatLoading}
                                 onClick={sendAdditionalRequest}
                                 text="말투를 바꿔줘"
                             />
                             <ActionButton
-                                isDisabled={isAILoading}
+                                isDisabled={isChatLoading}
                                 onClick={sendAdditionalRequest}
                                 text="좀 더 짧게 써줘"
                             />
                         </Center>
                     )}
-                    {isAILoading && (
+                    {isChatLoading && (
                         <Center>
                             <LoadingDots />
                         </Center>
@@ -128,9 +137,9 @@ export default function Page() {
             </Box>
             <ChatInput
                 onSubmit={sendChatReply}
-                galleryButtonProps={{ isDisabled: isAILoading }}
-                inputProps={{ isDisabled: isAILoading }}
-                sendButtonProps={{ isDisabled: isAILoading }}
+                galleryButtonProps={{ isDisabled: isChatLoading }}
+                inputProps={{ isDisabled: isChatLoading }}
+                sendButtonProps={{ isDisabled: isChatLoading }}
             />
         </>
     );
