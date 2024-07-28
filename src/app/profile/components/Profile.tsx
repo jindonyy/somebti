@@ -22,10 +22,11 @@ export default function Profile() {
                 <Text as="b" fontSize="24px" fontWeight="600">
                     {userStore.user.username}
                 </Text>
-                <Text color="#aaa">
-                    {GENDER[userStore.user.gender ?? 'FEMALE'].label} ·
-                    {dayjs(userStore.user.birth ?? new Date()).format('YYYY/MM/DD')}
-                </Text>
+                {userStore.user.gender && userStore.user.birth && (
+                    <Text color="#aaa">
+                        {GENDER[userStore.user.gender].label} ·{dayjs(userStore.user.birth).format('YYYY/MM/DD')}
+                    </Text>
+                )}
             </Box>
         </Box>
     );
