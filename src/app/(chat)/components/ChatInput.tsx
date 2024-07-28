@@ -5,9 +5,9 @@ import { Box, Center, IconButton, IconButtonProps, Input, InputProps } from '@ch
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 
 export interface ChatInputProps {
-    galleryButtonProps?: IconButtonProps;
+    galleryButtonProps?: Omit<IconButtonProps, 'aria-label'>;
     inputProps?: InputProps;
-    sendButtonProps?: IconButtonProps;
+    sendButtonProps?: Omit<IconButtonProps, 'aria-label'>;
     onSubmit: FormEventHandler<HTMLFormElement>;
 }
 

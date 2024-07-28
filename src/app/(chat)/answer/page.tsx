@@ -6,6 +6,7 @@ import { clientAdditionalRequest, clientGetRecentMessage, clientPostChatReply } 
 import { FormEventHandler, MouseEventHandler, useEffect, useState } from 'react';
 import { Chat, ChatType, SenderType } from '@/types/answer';
 import { useUserStore } from '@/stores';
+import { LoadingDots } from '@/components';
 
 const components = {
     ai: AIChat,
@@ -26,6 +27,7 @@ export default function Page() {
     const [chats, setChats] = useState<Chat[]>([]);
     const [visibleActionButton, setVisibleActionButton] = useState(false);
     const [additionalChatIds, setAdditionalChatIds] = useState<string[]>([]);
+    const [isAILoading, setAILoading] = useState(false);
 
     const fetchMessage = async () => {
         const response = await clientGetRecentMessage();
@@ -37,26 +39,44 @@ export default function Page() {
         const formData = new FormData(event.target);
         const inputValue = formData.get('chat') as string;
         if (inputValue) {
-            const response = await clientPostChatReply({ chatType: '답장하기', text: inputValue });
-            setChats([initialChat, ...response.reverse()]);
-            const newAdditionalIds = response.slice(response.length - 6).reduce<string[]>((acc, cur) => {
-                return cur.senderType === 'opponent' || cur.senderType === 'user' ? [...acc, cur.messageId] : acc;
-            }, []);
-            setAdditionalChatIds(newAdditionalIds);
+            setAILoading(true);
+            try {
+                const response = await clientPostChatReply({ chatType: '답장하기', text: inputValue });
+                if (response) {
+                    setAILoading(false);
+                    setChats([initialChat, ...response.reverse()]);
+                    const newAdditionalIds = response.slice(response.length - 6).reduce<string[]>((acc, cur) => {
+                        return cur.senderType === 'opponent' || cur.senderType === 'user'
+                            ? [...acc, cur.messageId]
+                            : acc;
+                    }, []);
+                    setAdditionalChatIds(newAdditionalIds);
+                    setVisibleActionButton(false);
+                }
+            } catch {
+                setAILoading(false);
+            }
         }
-        setVisibleActionButton(false);
     };
 
     const sendAdditionalRequest: MouseEventHandler<HTMLButtonElement> = async (event) => {
         // @ts-ignore
         const additionalReq: string = event.target.name;
-        const response = await clientAdditionalRequest({ additionalReq, messageIds: additionalChatIds });
-        setChats([initialChat, ...response.reverse()]);
-        setVisibleActionButton(true);
-        const newAdditionalIds = response.slice(response.length - 5).reduce<string[]>((acc, cur) => {
-            return cur.senderType === 'user' ? [...acc, cur.messageId] : acc;
-        }, []);
-        setAdditionalChatIds((prev) => [...prev, ...newAdditionalIds]);
+        setAILoading(true);
+        try {
+            const response = await clientAdditionalRequest({ additionalReq, messageIds: additionalChatIds });
+            if (response) {
+                setAILoading(false);
+                setChats([initialChat, ...response.reverse()]);
+                setVisibleActionButton(true);
+                const newAdditionalIds = response.slice(response.length - 5).reduce<string[]>((acc, cur) => {
+                    return cur.senderType === 'user' ? [...acc, cur.messageId] : acc;
+                }, []);
+                setAdditionalChatIds((prev) => [...prev, ...newAdditionalIds]);
+            }
+        } catch {
+            setAILoading(false);
+        }
     };
 
     useEffect(() => {
@@ -84,14 +104,32 @@ export default function Page() {
                     })}
                     {visibleActionButton && (
                         <Center gap="8px">
-                            <ActionButton onClick={sendAdditionalRequest} text="더 추천해줘" />
-                            <ActionButton onClick={sendAdditionalRequest} text="말투를 바꿔줘" />
-                            <ActionButton onClick={sendAdditionalRequest} text="좀 더 짧게 써줘" />
+                            <ActionButton isDisabled={isAILoading} onClick={sendAdditionalRequest} text="더 추천해줘" />
+                            <ActionButton
+                                isDisabled={isAILoading}
+                                onClick={sendAdditionalRequest}
+                                text="말투를 바꿔줘"
+                            />
+                            <ActionButton
+                                isDisabled={isAILoading}
+                                onClick={sendAdditionalRequest}
+                                text="좀 더 짧게 써줘"
+                            />
+                        </Center>
+                    )}
+                    {isAILoading && (
+                        <Center>
+                            <LoadingDots />
                         </Center>
                     )}
                 </Stack>
             </Box>
-            <ChatInput onSubmit={sendChatReply} />
+            <ChatInput
+                onSubmit={sendChatReply}
+                galleryButtonProps={{ isDisabled: isAILoading }}
+                inputProps={{ isDisabled: isAILoading }}
+                sendButtonProps={{ isDisabled: isAILoading }}
+            />
         </>
     );
 }
