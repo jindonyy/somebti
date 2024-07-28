@@ -8,11 +8,7 @@ interface Props {
 }
 
 export default function OpponentChat(props: Props) {
-    const {
-        username,
-        profileImageUrl,
-        text = '안녕하세요! 제훈님의 최근 메세지를 입력해주시면 답장을 추천해드릴게요.',
-    } = props;
+    const { username, profileImageUrl, text } = props;
 
     return (
         <Flex gap="0px">
