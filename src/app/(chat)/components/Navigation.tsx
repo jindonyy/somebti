@@ -10,18 +10,12 @@ import {
     ProfileOffIcon,
     ProfileOnIcon,
 } from '@/assets';
-import { useMe, useOpponent } from '@/hooks';
-import { useUserStore } from '@/stores';
 import { Flex, IconButton } from '@chakra-ui/react';
-import { getCookie } from 'cookies-next';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Navigation() {
     const path = usePathname();
-    const router = useRouter();
-    const userStore = useUserStore(({ setUser, setOpponent }) => ({ setUser, setOpponent }));
 
     const isAnswerPage = path === '/' || path.startsWith('/answer');
     const isFirstTalkPage = path.startsWith('/first_talk');
@@ -31,16 +25,6 @@ export default function Navigation() {
     const handleAlert = () => {
         alert('준비 중입니다. 잠시만 기다려주세요! :)');
     };
-
-    useEffect(() => {
-        const token = getCookie('access_token');
-        if (token) {
-            void useMe(userStore.setUser);
-            void useOpponent(userStore.setOpponent);
-        } else {
-            router.replace('/login');
-        }
-    }, []);
 
     return (
         <Flex

@@ -1,14 +1,37 @@
+'use client';
+
 import { Avatar, Center, Flex, Text } from '@chakra-ui/react';
 import { Avatar as AvatarIcon } from '@/assets';
-import { MBTI } from '@/constants/user';
+import { useUserStore } from '@/stores';
+import { useEffect } from 'react';
+import { useMe, useOpponent } from '@/hooks';
+import { useRouter } from 'next/navigation';
+import { getCookie } from 'cookies-next';
 
-interface Props {
-    username: string;
-    mbti: MBTI;
-}
+export default function ChatHeader() {
+    const router = useRouter();
+    const userStore = useUserStore(({ user, setUser, opponent, setOpponent }) => ({
+        user,
+        setUser,
+        opponent,
+        setOpponent,
+    }));
 
-export default function ChatHeader(props: Props) {
-    const { username, mbti } = props;
+    const fetchMe = async () => {
+        const token = getCookie('access_token');
+        if (token) {
+            const me = await useMe();
+            const opponent = await useOpponent();
+            userStore.setUser(me);
+            userStore.setOpponent(opponent);
+        } else {
+            await router.replace('/login');
+        }
+    };
+
+    useEffect(() => {
+        void fetchMe();
+    }, []);
 
     return (
         <Flex
@@ -27,22 +50,26 @@ export default function ChatHeader(props: Props) {
             overflow="hidden"
         >
             <Center gap="4px">
-                <Avatar icon={<AvatarIcon />} width="36px" height="36px" />
-                <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1">
-                    {username}
-                </Text>
-                <Text
-                    as="span"
-                    p="2px 5px"
-                    bg="#525252"
-                    fontSize="11px"
-                    fontWeight="500"
-                    lineHeight="14px"
-                    color="white"
-                    rounded="8px"
-                >
-                    {mbti}
-                </Text>
+                <Avatar icon={<AvatarIcon />} src={userStore.user.profileImageUrl ?? ''} width="36px" height="36px" />
+                {userStore.user.username && (
+                    <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1">
+                        {userStore.user.username}
+                    </Text>
+                )}
+                {userStore.user.mbti && (
+                    <Text
+                        as="span"
+                        p="2px 5px"
+                        bg="#525252"
+                        fontSize="11px"
+                        fontWeight="500"
+                        lineHeight="14px"
+                        color="white"
+                        rounded="8px"
+                    >
+                        {userStore.user.mbti}
+                    </Text>
+                )}
             </Center>
         </Flex>
     );

@@ -1,9 +1,10 @@
 import { clientOpponent } from '@/apis/user';
-import { Opponent } from '@/types';
 
-export const useOpponent = async (setOpponent: (opponent: Opponent) => void) => {
+export const useOpponent = async () => {
     try {
         const { opponent } = await clientOpponent();
-        setOpponent(opponent);
-    } catch {}
+        return opponent;
+    } catch {
+        return Promise.reject();
+    }
 };

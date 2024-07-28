@@ -1,9 +1,10 @@
 import { clientMe } from '@/apis/user';
-import { User } from '@/types';
 
-export const useMe = async (setUser: (user: User) => void) => {
+export const useMe = async () => {
     try {
         const { user } = await clientMe();
-        setUser(user);
-    } catch {}
+        return user;
+    } catch {
+        return Promise.reject();
+    }
 };
