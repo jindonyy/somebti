@@ -2,7 +2,7 @@
 
 import { GalleryIcon, SendOffIcon, SendOnIcon } from '@/assets';
 import { Box, Center, IconButton, IconButtonProps, Input, InputProps } from '@chakra-ui/react';
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { ChangeEventHandler, FormEventHandler, useRef, useState } from 'react';
 
 export interface ChatInputProps {
     galleryButtonProps?: Omit<IconButtonProps, 'aria-label'>;
@@ -14,6 +14,7 @@ export interface ChatInputProps {
 export default function ChatInput(props: ChatInputProps) {
     const { galleryButtonProps, inputProps, sendButtonProps, onSubmit } = props;
     const [isSendDisabled, setIsSendDisabled] = useState(true);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleChangeInput: ChangeEventHandler<HTMLInputElement> = (event) => {
         if (event.target.value) {
@@ -27,6 +28,9 @@ export default function ChatInput(props: ChatInputProps) {
     const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
         onSubmit(event);
+        if (inputRef.current) {
+            inputRef.current.value = '';
+        }
     };
 
     return (
@@ -65,7 +69,7 @@ export default function ChatInput(props: ChatInputProps) {
                     <GalleryIcon width="48px" height="48px" />
                 </IconButton>
                 <Input
-                    {...inputProps}
+                    ref={inputRef}
                     name="chat"
                     onChange={handleChangeInput}
                     border="0"
@@ -73,6 +77,7 @@ export default function ChatInput(props: ChatInputProps) {
                     w="100%"
                     h="100%"
                     px="10px"
+                    {...inputProps}
                 />
                 <IconButton
                     width="48px"
