@@ -12,3 +12,7 @@ export type Chat = {
 };
 
 export type RecentlyMassagerResponse = Chat[];
+
+export type ChatReplyResponse = Chat[];
+
+export type AdditionalRequestResponse = Chat[];
