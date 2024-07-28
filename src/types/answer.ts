@@ -13,6 +13,6 @@ export type Chat = {
 
 export type RecentlyMassagerResponse = Chat[];
 
-export type ChatReplyResponse = Chat[];
+export type ChatReplyResponse = { messages: Chat[] };
 
-export type AdditionalRequestResponse = Chat[];
+export type AdditionalRequestResponse = { messages: Chat[] };

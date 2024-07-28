@@ -24,7 +24,7 @@ export default function Page() {
         type: null,
         chatType: '답장하기' as ChatType,
     };
-    const [chats, setChats] = useState<Chat[]>([]);
+    const [chats, setChats] = useState<Chat[]>([initialChat]);
     const [visibleActionButton, setVisibleActionButton] = useState(false);
     const [additionalChatIds, setAdditionalChatIds] = useState<string[]>([]);
     const [isAILoading, setAILoading] = useState(false);
@@ -44,14 +44,14 @@ export default function Page() {
                 const response = await clientPostChatReply({ chatType: '답장하기', text: inputValue });
                 if (response) {
                     setAILoading(false);
-                    setChats([initialChat, ...response.reverse()]);
-                    const newAdditionalIds = response.slice(response.length - 6).reduce<string[]>((acc, cur) => {
+                    const newAdditionalIds = response.messages.slice(0, 5).reduce<string[]>((acc, cur) => {
                         return cur.senderType === 'opponent' || cur.senderType === 'user'
                             ? [...acc, cur.messageId]
                             : acc;
                     }, []);
+                    await fetchMessage();
+                    setVisibleActionButton(true);
                     setAdditionalChatIds(newAdditionalIds);
-                    setVisibleActionButton(false);
                 }
             } catch {
                 setAILoading(false);
@@ -67,9 +67,8 @@ export default function Page() {
             const response = await clientAdditionalRequest({ additionalReq, messageIds: additionalChatIds });
             if (response) {
                 setAILoading(false);
-                setChats([initialChat, ...response.reverse()]);
-                setVisibleActionButton(true);
-                const newAdditionalIds = response.slice(response.length - 5).reduce<string[]>((acc, cur) => {
+                setChats([initialChat, ...response.messages.reverse()]);
+                const newAdditionalIds = response.messages.slice(0, 4).reduce<string[]>((acc, cur) => {
                     return cur.senderType === 'user' ? [...acc, cur.messageId] : acc;
                 }, []);
                 setAdditionalChatIds((prev) => [...prev, ...newAdditionalIds]);
@@ -93,13 +92,16 @@ export default function Page() {
                     {chats.map((chat) => {
                         const Component = components[chat.senderType];
                         if (chat.senderType === 'user') {
-                            return (
-                                <Stack key={chat.messageId} gap="12px">
-                                    <MyChat key={chat.messageId} {...chat} />
-                                </Stack>
-                            );
+                            return <MyChat key={chat.messageId} {...chat} type={chat.type ?? ''} />;
                         } else {
-                            return <Component key={chat.messageId} {...chat} {...userStore.opponent} />;
+                            return (
+                                <Component
+                                    key={chat.messageId}
+                                    {...chat}
+                                    type={chat.type ?? ''}
+                                    {...userStore.opponent}
+                                />
+                            );
                         }
                     })}
                     {visibleActionButton && (
