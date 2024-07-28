@@ -95,11 +95,11 @@ export default function Page() {
                         if (chat.senderType === 'user') {
                             return (
                                 <Stack key={chat.messageId} gap="12px">
-                                    <Component {...chat} />
+                                    <MyChat key={chat.messageId} {...chat} />
                                 </Stack>
                             );
                         } else {
-                            return <Component key={chat.messageId} {...chat} />;
+                            return <Component key={chat.messageId} {...chat} {...userStore.opponent} />;
                         }
                     })}
                     {visibleActionButton && (
