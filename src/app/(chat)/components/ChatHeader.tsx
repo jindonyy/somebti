@@ -40,6 +40,7 @@ export default function ChatHeader() {
             top="10px"
             left="50%"
             justify="space-between"
+            gap="20px"
             width="min(calc(100% - 48px), calc(420px - 48px))"
             p="13px"
             bg="white"
@@ -49,10 +50,10 @@ export default function ChatHeader() {
             zIndex="100"
             overflow="hidden"
         >
-            <Center gap="4px">
+            <Center gap="4px" maxW="80%">
                 <Avatar icon={<AvatarIcon />} width="36px" height="36px" />
                 {userStore.opponent.username && (
-                    <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1">
+                    <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1" isTruncated>
                         {userStore.opponent.username}
                     </Text>
                 )}
@@ -71,29 +72,7 @@ export default function ChatHeader() {
                     </Text>
                 )}
             </Center>
-            <Text>. . . .</Text>
-            <Center gap="4px">
-                <Avatar icon={<AvatarIcon />} src={userStore.user.profileImageUrl ?? ''} width="36px" height="36px" />
-                {userStore.user.username && (
-                    <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1">
-                        {userStore.user.username}
-                    </Text>
-                )}
-                {userStore.user.mbti && (
-                    <Text
-                        as="span"
-                        p="2px 5px"
-                        bg="#525252"
-                        fontSize="11px"
-                        fontWeight="500"
-                        lineHeight="14px"
-                        color="white"
-                        rounded="8px"
-                    >
-                        {userStore.user.mbti}
-                    </Text>
-                )}
-            </Center>
+            <Avatar icon={<AvatarIcon />} src={userStore.user.profileImageUrl ?? ''} width="36px" height="36px" />
         </Flex>
     );
 }
