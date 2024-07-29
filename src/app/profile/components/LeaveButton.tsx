@@ -8,8 +8,14 @@ export default function LeaveButton() {
     const router = useRouter();
 
     const handleLeave = async () => {
-        await clientLeave();
-        router.replace('/login');
+        try {
+            const response = await clientLeave();
+            if (response) {
+                router.replace('/login');
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (

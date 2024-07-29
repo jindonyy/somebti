@@ -71,6 +71,7 @@ export const useKakaoLogin = () => {
                 if (!kakaoAccessToken) {
                     const kakaoToken = await getKakaoToken();
                     kakaoAccessToken = kakaoToken?.access_token;
+                    setCookie('kakao_access_token', kakaoAccessToken);
                 }
 
                 const kakaoUserData = await getKaKaoUserData(kakaoAccessToken);
