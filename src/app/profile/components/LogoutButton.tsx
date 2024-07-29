@@ -11,6 +11,7 @@ export default function LogoutButton() {
         const token = getCookie('access_token');
         if (token) {
             deleteCookie('access_token');
+            deleteCookie('kakao_access_token');
             window.Kakao.Auth.logout();
             router.replace('/login');
         }

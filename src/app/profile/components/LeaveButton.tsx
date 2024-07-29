@@ -2,6 +2,7 @@
 
 import { clientLeave } from '@/apis/auth';
 import { BottomButton } from '@/components';
+import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 
 export default function LeaveButton() {
@@ -11,6 +12,8 @@ export default function LeaveButton() {
         try {
             const response = await clientLeave();
             if (response) {
+                deleteCookie('access_token');
+                deleteCookie('kakao_access_token');
                 router.replace('/login');
             }
         } catch (error) {
