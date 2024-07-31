@@ -14,7 +14,7 @@ import {
 import { ChangeEventHandler, FormEventHandler, useRef, useState } from 'react';
 
 export interface ChatInputProps {
-    galleryButtonProps?: { label: FormLabelProps; input: InputProps };
+    galleryButtonProps?: { label?: FormLabelProps; input?: InputProps };
     inputProps?: InputProps;
     sendButtonProps?: Omit<IconButtonProps, 'aria-label'>;
     onSubmit: FormEventHandler<HTMLFormElement>;

@@ -137,7 +137,7 @@ export default function Page() {
             </Box>
             <ChatInput
                 onSubmit={sendChatReply}
-                galleryButtonProps={{ isDisabled: isChatLoading }}
+                galleryButtonProps={{ input: { isDisabled: isChatLoading } }}
                 inputProps={{ isDisabled: isChatLoading }}
                 sendButtonProps={{ isDisabled: isChatLoading }}
             />
