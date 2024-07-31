@@ -1,3 +1,3 @@
 export * from './auth/useKakaoLogin';
-export * from './useMe';
-export * from './useOpponent';
+export * from './user/useMe';
+export * from './user/useOpponent';
