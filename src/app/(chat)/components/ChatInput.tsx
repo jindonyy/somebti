@@ -1,11 +1,20 @@
 'use client';
 
 import { GalleryIcon, SendOffIcon, SendOnIcon } from '@/assets';
-import { Box, Center, IconButton, IconButtonProps, Input, InputProps } from '@chakra-ui/react';
+import {
+    Box,
+    Center,
+    FormLabel,
+    FormLabelProps,
+    IconButton,
+    IconButtonProps,
+    Input,
+    InputProps,
+} from '@chakra-ui/react';
 import { ChangeEventHandler, FormEventHandler, useRef, useState } from 'react';
 
 export interface ChatInputProps {
-    galleryButtonProps?: Omit<IconButtonProps, 'aria-label'>;
+    galleryButtonProps?: { label: FormLabelProps; input: InputProps };
     inputProps?: InputProps;
     sendButtonProps?: Omit<IconButtonProps, 'aria-label'>;
     onSubmit: FormEventHandler<HTMLFormElement>;
@@ -56,18 +65,18 @@ export default function ChatInput(props: ChatInputProps) {
                 borderColor="#E5E5E5"
                 display="flex"
             >
-                <IconButton
-                    onClick={() => alert('준비 중입니다. 잠시만 기다려주세요! :)')}
-                    width="48px"
-                    minWidth="auto"
-                    height="48px"
-                    bg="transparent"
-                    _hover={{ bg: 'transparent' }}
-                    aria-label="image send button"
-                    {...galleryButtonProps}
-                >
+                <FormLabel htmlFor="chatImage" m="0" {...galleryButtonProps?.label}>
                     <GalleryIcon width="48px" height="48px" />
-                </IconButton>
+                </FormLabel>
+                <Input
+                    type="file"
+                    id="chatImage"
+                    accept=".jpeg,.jpg,.png"
+                    display="none"
+                    // capture="environment"
+                    onChange={(event) => alert(event.target.value)}
+                    {...galleryButtonProps?.input}
+                />
                 <Input
                     ref={inputRef}
                     name="chat"
