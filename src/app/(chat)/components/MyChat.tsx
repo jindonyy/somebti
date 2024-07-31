@@ -1,4 +1,9 @@
+'use client';
+
+import { useCopy } from '@/hooks/useCopy';
+import { useLongClick } from '@/hooks/useLongClick';
 import { Flex, Stack, Text } from '@chakra-ui/react';
+import { useEffect, useRef } from 'react';
 
 interface Props {
     type: string;
@@ -7,9 +12,21 @@ interface Props {
 
 export default function MyChat(props: Props) {
     const { type, text } = props;
+    const ref = useRef<HTMLDivElement>(null);
+    const { copy } = useCopy();
+
+    const handleCopy = () => {
+        copy(text);
+    };
+
+    useEffect(() => {
+        if (ref.current) {
+            useLongClick<HTMLDivElement>(ref, 500, handleCopy);
+        }
+    }, [ref.current]);
 
     return (
-        <Flex justify="flex-end" gap="0px" fontSize="14px" lineHeight="21px">
+        <Flex ref={ref} justify="flex-end" gap="0px" fontSize="14px" lineHeight="21px" userSelect="none">
             <Stack maxW="80%" gap="4px">
                 <Text textAlign="right">{type}</Text>
                 <Text
