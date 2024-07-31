@@ -53,7 +53,7 @@ export default function ChatHeader() {
             <Center gap="4px" maxW="80%">
                 <Avatar icon={<AvatarIcon />} width="36px" height="36px" />
                 {userStore.opponent.username && (
-                    <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1" isTruncated>
+                    <Text as="span" fontSize="16px" fontWeight="600" isTruncated>
                         {userStore.opponent.username}
                     </Text>
                 )}
