@@ -4,6 +4,7 @@ import { useCopy } from '@/hooks/useCopy';
 import { useLongClick } from '@/hooks/useLongClick';
 import { Flex, Stack, Text } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
+import { useToast } from '@chakra-ui/react';
 
 interface Props {
     type: string;
@@ -14,9 +15,11 @@ export default function MyChat(props: Props) {
     const { type, text } = props;
     const ref = useRef<HTMLDivElement>(null);
     const { copy } = useCopy();
+    const toast = useToast({ containerStyle: { background: '#8877F5' } });
 
-    const handleCopy = () => {
-        copy(text);
+    const handleCopy = async () => {
+        await copy(text);
+        toast({ description: '복사되었습니다' });
     };
 
     useEffect(() => {
