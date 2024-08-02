@@ -64,6 +64,7 @@ export default function ChatInput(props: ChatInputProps) {
                 rounded="24px"
                 borderColor="#E5E5E5"
                 display="flex"
+                autoComplete="off"
             >
                 <FormLabel htmlFor="chatImage" m="0" {...galleryButtonProps?.label}>
                     <GalleryIcon width="48px" height="48px" />
