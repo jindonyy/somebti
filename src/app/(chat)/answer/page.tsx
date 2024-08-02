@@ -92,7 +92,7 @@ export default function Page() {
 
     return (
         <>
-            <Box flexGrow="1" p="50px 0 80px" overflow="hidden">
+            <Box h="100dvh" p="50px 0 152px" overflow="hidden">
                 <Stack ref={chatListRef} gap="24px" maxH="100%" p="43px 24px 19px" overflow="hidden auto">
                     {chats.map((chat) => {
                         const Component = components[chat.senderType];

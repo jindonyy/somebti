@@ -27,7 +27,21 @@ export default function Navigation() {
     };
 
     return (
-        <Flex maxW="420px" zIndex="100" p="6px 24px 21px" bg="white" w="100%" justify="space-between">
+        <Flex
+            position="fixed"
+            left="50%"
+            bottom="0"
+            maxW="420px"
+            transform="translateX(-50%)"
+            zIndex="100"
+            py="12px"
+            px="24px"
+            pt="6px"
+            pb="21px"
+            bg="white"
+            w="100%"
+            justify="space-between"
+        >
             <Link href="/answer">{isAnswerPage ? <AnswerOnIcon /> : <AnswerOffIcon />}</Link>
             <IconButton
                 onClick={handleAlert}
