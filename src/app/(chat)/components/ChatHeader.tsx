@@ -51,7 +51,7 @@ export default function ChatHeader() {
             overflow="hidden"
         >
             <Center gap="4px" maxW="80%">
-                <Avatar icon={<AvatarIcon />} width="36px" height="36px" />
+                <Avatar icon={<AvatarIcon width="36px" />} width="36px" height="36px" />
                 {userStore.opponent.username && (
                     <Text as="span" fontSize="16px" fontWeight="600" isTruncated>
                         {userStore.opponent.username}
@@ -72,7 +72,12 @@ export default function ChatHeader() {
                     </Text>
                 )}
             </Center>
-            <Avatar icon={<AvatarIcon />} src={userStore.user.profileImageUrl ?? ''} width="36px" height="36px" />
+            <Avatar
+                icon={<AvatarIcon width="36px" />}
+                src={userStore.user.profileImageUrl ?? ''}
+                width="36px"
+                height="36px"
+            />
         </Flex>
     );
 }
