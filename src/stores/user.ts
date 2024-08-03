@@ -9,18 +9,15 @@ export interface UserStore {
 }
 
 const initialUser = {
+    userId: '',
     kakaoId: '',
     username: '',
-    email: null,
-    birth: null,
     gender: null,
     mbti: null,
-    profileImageUrl: null,
 };
 
 const initialOpponent = {
     username: '',
-    birth: null,
     gender: null,
     mbti: null,
 };

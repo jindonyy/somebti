@@ -1,4 +1,13 @@
-import { Gender, MBTI } from '@/constants/user';
+import {
+    ContactPattern,
+    DatingExperience,
+    FirstMeetingFrequency,
+    FirstMeetingReason,
+    Gender,
+    Job,
+    MBTI,
+    Relation,
+} from '@/constants/user';
 
 export type KakaoUser = {
     id: number;
@@ -27,30 +36,37 @@ export type KakaoUser = {
 };
 
 export type User = {
-    email?: string | null;
+    userId: string;
     kakaoId: string;
     username: string;
+    email?: string;
+    profileImageUrl?: string;
     mbti: MBTI | null;
     gender: Gender | null;
-    birth?: string | null;
-    job?: string;
-    siblings?: string;
+    birth?: string;
+    job?: Job | string;
+    siblings?: { brother: number; sister: number; order: number };
     interest?: string;
-    profileImageUrl?: string | null;
-    datingExperience?: string;
+    hobby?: string;
+    datingExperience?: DatingExperience;
 };
 
 export type Opponent = {
     username: string;
     mbti: MBTI | null;
     gender: Gender | null;
-    birth?: string | null;
-    relation?: string;
-    knownPeriod?: string;
-    firstMeetingReason?: string;
-    meetingCount?: string;
-    meetingFrequency?: string;
-    contactPattern?: string;
+    birth?: string;
+    relation?: Relation;
+    knownPeriod?: number;
+    firstMeetingReason?: FirstMeetingReason;
+    meetingCount?: number;
+    meetingFrequency?: FirstMeetingFrequency;
+    contactPattern?: ContactPattern;
+    job?: Job | string;
+    siblings?: { brother: number; sister: number; order: number };
+    interest?: string;
+    hobby?: string;
+    datingExperience?: DatingExperience;
 };
 
 export type MeResponse = {
