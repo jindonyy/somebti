@@ -52,8 +52,7 @@ export default function ChatInput(props: ChatInputProps) {
             transform="translateX(-50%)"
             zIndex="100"
             bg="white"
-            py="14px"
-            px="15px"
+            p="14px 15px"
         >
             <Center
                 as="form"
@@ -87,6 +86,7 @@ export default function ChatInput(props: ChatInputProps) {
                     w="100%"
                     h="100%"
                     px="10px"
+                    fontSize="14px"
                     {...inputProps}
                 />
                 <IconButton
@@ -98,8 +98,8 @@ export default function ChatInput(props: ChatInputProps) {
                     _disabled={{ opacity: 1 }}
                     isDisabled={isSendDisabled}
                     aria-label="send icon button"
-                    {...sendButtonProps}
                     type="submit"
+                    {...sendButtonProps}
                 >
                     {isSendDisabled ? <SendOffIcon /> : <SendOnIcon />}
                 </IconButton>
