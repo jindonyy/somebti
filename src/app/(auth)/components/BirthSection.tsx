@@ -39,6 +39,7 @@ export default function BirthSection(props: Props) {
             bg="#fff"
             rounded="8px"
             border="0"
+            textAlign="left"
         />
     );
 }
