@@ -15,7 +15,7 @@ export default function OpponentChat(props: Props) {
             <Flex maxW="80%" gap="4px">
                 <Avatar icon={<AvatarIcon />} src={profileImageUrl} width="36px" height="36px" />
                 <Stack gap="4px">
-                    <Text as="span" fontSize="16px" fontWeight="600" lineHeight="1">
+                    <Text as="span" fontSize="16px" fontWeight="600">
                         {username}
                     </Text>
                     <Text
