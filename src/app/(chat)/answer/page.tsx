@@ -44,7 +44,6 @@ export default function Page() {
             try {
                 const response = await clientPostChatReply({ chatType: '답장하기', text: inputValue });
                 if (response) {
-                    setIsChatLoading(false);
                     await fetchMessage();
                     const newAdditionalIds = response.messages
                         .filter((msg) => msg.senderType === 'opponent' || msg.senderType === 'user')
@@ -53,6 +52,7 @@ export default function Page() {
                     setAdditionalChatIds(newAdditionalIds);
                 }
             } catch {
+            } finally {
                 setIsChatLoading(false);
             }
         }
@@ -94,14 +94,14 @@ export default function Page() {
         <>
             <Box h="100dvh" p="50px 0 152px" overflow="hidden">
                 <Stack ref={chatListRef} gap="24px" maxH="100%" p="43px 24px 19px" overflow="hidden auto">
-                    {chats.map((chat) => {
+                    {chats.map((chat, index) => {
                         const Component = components[chat.senderType];
                         if (chat.senderType === 'user') {
-                            return <MyChat key={chat.messageId} {...chat} type={chat.type ?? ''} />;
+                            return <MyChat key={chat.messageId + index} {...chat} type={chat.type ?? ''} />;
                         } else {
                             return (
                                 <Component
-                                    key={chat.messageId}
+                                    key={chat.messageId + index}
                                     {...chat}
                                     type={chat.type ?? ''}
                                     {...userStore.opponent}
