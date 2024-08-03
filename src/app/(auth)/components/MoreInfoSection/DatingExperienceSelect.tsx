@@ -4,8 +4,8 @@ import { Select } from '@chakra-ui/react';
 export default function DatingExperienceSelect() {
     return (
         <Select
-            variant="unstyled"
             placeholder="선택"
+            variant="unstyled"
             height="52px"
             bg="white"
             rounded="8px"

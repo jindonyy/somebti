@@ -1,7 +1,8 @@
 import { Opponent, User } from '@/types';
 import { Center, Flex, Input, Stack, Text } from '@chakra-ui/react';
-import JobSelect from './JobSelect';
-import DatingExperienceSelect from './DatingExperienceSelect';
+import FirstMeetingReasonSelect from './FirstMeetingReasonSelect';
+import FirstMeetingFrequencySelect from './FirstMeetingFrequencySelect';
+import ContactPatternSelect from './ContactPatternSelect';
 
 interface Props {
     user: User | Opponent;
@@ -14,11 +15,11 @@ export default function HistorySection(props: Props) {
     return (
         <Stack as="form" gap="32px" fontSize="14px">
             <Stack gap="8px">
-                <Text>직업</Text>
-                <JobSelect />
+                <Text>처음 만난 계기</Text>
+                <FirstMeetingReasonSelect />
             </Stack>
             <Stack gap="8px">
-                <Text>형제 관계</Text>
+                <Text>알고 지낸 기간</Text>
                 <Flex gap="16px" fontSize="14px">
                     <Center gap="4px">
                         <Input
@@ -31,10 +32,11 @@ export default function HistorySection(props: Props) {
                             px="16px"
                             bg="white"
                             rounded="8px"
+                            fontSize="14px"
                             textAlign="center"
                             defaultValue={0}
                         />
-                        남
+                        년
                     </Center>
                     <Center gap="4px">
                         <Input
@@ -47,58 +49,40 @@ export default function HistorySection(props: Props) {
                             px="16px"
                             bg="white"
                             rounded="8px"
+                            fontSize="14px"
                             textAlign="center"
                             defaultValue={0}
                         />
-                        녀
-                    </Center>
-                    <Center gap="4px">
-                        <Input
-                            type="number"
-                            variant="unstyled"
-                            min={0}
-                            minLength={1}
-                            width="48px"
-                            height="52px"
-                            px="16px"
-                            bg="white"
-                            rounded="8px"
-                            textAlign="center"
-                            defaultValue={0}
-                        />
-                        째
+                        개월
                     </Center>
                 </Flex>
             </Stack>
             <Stack gap="8px">
-                <Text>관심사</Text>
-                <Input
-                    placeholder="직접입력"
-                    minLength={1}
-                    variant="unstyled"
-                    height="52px"
-                    px="16px"
-                    bg="white"
-                    rounded="8px"
-                    fontSize="14px"
-                />
+                <Text>지금까지 만난 횟수</Text>
+                <Flex alignItems="center" gap="4px">
+                    <Input
+                        type="number"
+                        variant="unstyled"
+                        min={0}
+                        minLength={1}
+                        width="130px"
+                        height="52px"
+                        px="16px"
+                        bg="white"
+                        rounded="8px"
+                        fontSize="14px"
+                        defaultValue={0}
+                    />
+                    회
+                </Flex>
             </Stack>
             <Stack gap="8px">
-                <Text>취미</Text>
-                <Input
-                    placeholder="직접입력"
-                    minLength={1}
-                    variant="unstyled"
-                    height="52px"
-                    px="16px"
-                    bg="white"
-                    rounded="8px"
-                    fontSize="14px"
-                />
+                <Text>만남 빈도</Text>
+                <FirstMeetingFrequencySelect />
             </Stack>
             <Stack gap="8px">
-                <Text>연애경험</Text>
-                <DatingExperienceSelect />
+                <Text>연락 패턴</Text>
+                <ContactPatternSelect />
             </Stack>
         </Stack>
     );

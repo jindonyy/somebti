@@ -57,7 +57,7 @@ export const FIRST_MEETING_REASON = {
     직장: { value: 'work', label: '직장' },
     소개: { value: 'meeting', label: '소개' },
     우연한_계기: { value: 'coincidental', label: '우연한 계기' },
-    기타: { value: 'ect', label: '기타' },
+    직접입력: { value: '', label: '직접입력' },
 } as const;
 export type FirstMeetingReason = EnumValues<typeof FIRST_MEETING_REASON>;
 
