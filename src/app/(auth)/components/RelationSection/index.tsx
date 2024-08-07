@@ -15,7 +15,7 @@ export default function RelationSection(props: Props) {
 
     const handleChange = (value: string) => {
         setCanNext(true);
-        setValue({ [property]: value });
+        // setValue({ [property]: value });
     };
 
     const { getRootProps, getRadioProps } = useRadioGroup({

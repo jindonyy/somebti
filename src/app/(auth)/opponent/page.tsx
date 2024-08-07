@@ -10,9 +10,9 @@ export default async function Page() {
             <Stack gap="8px">
                 <Title
                     title="상대의 정보도 입력해보세요"
-                    description="나와 상대방의 정보를 입력하면
+                    description="나와 상대방의 정보를 입력하면 맞춤 연애 코칭이 시작됩니다!
                     <br />
-                    맞춤 연애 코칭이 시작됩니다!"
+                    자세하게 입력할수록 정확한 추천 및 상담이 가능해요!"
                 />
             </Stack>
             <Stack gap="8px">
