@@ -12,10 +12,10 @@ export default function DatingExperienceSelect() {
             fontSize="14px"
             className="ps-[16px]"
         >
-            <option value={DATING_EXPERIENCE.많음.value}>{DATING_EXPERIENCE.많음.label}</option>
-            <option value={DATING_EXPERIENCE.보통.value}>{DATING_EXPERIENCE.보통.label}</option>
-            <option value={DATING_EXPERIENCE.적음.value}>{DATING_EXPERIENCE.적음.label}</option>
-            <option value={DATING_EXPERIENCE.없음.value}>{DATING_EXPERIENCE.없음.label}</option>
+            <option value={DATING_EXPERIENCE.a_lot.value}>{DATING_EXPERIENCE.a_lot.label}</option>
+            <option value={DATING_EXPERIENCE.average.value}>{DATING_EXPERIENCE.average.label}</option>
+            <option value={DATING_EXPERIENCE.little.value}>{DATING_EXPERIENCE.little.value}</option>
+            <option value={DATING_EXPERIENCE.none.value}>{DATING_EXPERIENCE.none.value}</option>
         </Select>
     );
 }

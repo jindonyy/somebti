@@ -1,33 +1,56 @@
 'use client';
 
-import { useUserStore } from '@/stores';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Stack, Text } from '@chakra-ui/react';
 import { Avatar } from '@chakra-ui/react';
 import { Avatar as AvatarIcon } from '@/assets';
 import dayjs from 'dayjs';
 import { GENDER } from '@/constants/user';
+import { Opponent, User } from '@/types';
 
-export default function Profile() {
-    const userStore = useUserStore(({ user }) => ({ user }));
+interface Props {
+    user: User | Opponent;
+}
+
+export default function Profile(props: Props) {
+    const { user } = props;
 
     return (
         <Box display="flex" alignItems="center">
-            <Avatar
-                icon={<AvatarIcon width="90px" height="90px" />}
-                src={userStore.user.profileImageUrl ?? ''}
-                width="90px"
-                height="90px"
-            />
-            <Box ml="24px">
-                <Text as="b" fontSize="24px" fontWeight="600">
-                    {userStore.user.username}
+            <Box position="relative">
+                <Avatar
+                    icon={<AvatarIcon width="80px" height="80px" />}
+                    // @ts-ignore
+                    src={user.profileImageUrl ?? ''}
+                    width="80px"
+                    height="80px"
+                    rounded="50%"
+                    overflow="hidden"
+                />
+                <Text
+                    as="span"
+                    position="absolute"
+                    top="0"
+                    left="-4px"
+                    p="2px 4px"
+                    fontSize="11px"
+                    fontWeight="500"
+                    color="#fff"
+                    bgColor="#404040"
+                    rounded="6px"
+                >
+                    {user.mbti}
                 </Text>
-                {userStore.user.gender && userStore.user.birth && (
-                    <Text color="#aaa">
-                        {GENDER[userStore.user.gender].label} ·{dayjs(userStore.user.birth).format('YYYY/MM/DD')}
+            </Box>
+            <Stack gap="3px" ml="24px">
+                <Text as="b" fontSize="16px" fontWeight="600">
+                    {user.username}
+                </Text>
+                {user.gender && user.birth && (
+                    <Text fontSize="14px" color="#737373">
+                        {GENDER[user.gender].label} ·{dayjs(user.birth).format('YYYY/MM/DD')}
                     </Text>
                 )}
-            </Box>
+            </Stack>
         </Box>
     );
 }

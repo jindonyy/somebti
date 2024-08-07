@@ -3,35 +3,12 @@
 import { Avatar, Center, Flex, Text } from '@chakra-ui/react';
 import { Avatar as AvatarIcon } from '@/assets';
 import { useUserStore } from '@/stores';
-import { useEffect } from 'react';
-import { useMe, useOpponent } from '@/hooks';
-import { useRouter } from 'next/navigation';
-import { getCookie } from 'cookies-next';
 
 export default function ChatHeader() {
-    const router = useRouter();
-    const userStore = useUserStore(({ user, setUser, opponent, setOpponent }) => ({
+    const userStore = useUserStore(({ user, opponent }) => ({
         user,
-        setUser,
         opponent,
-        setOpponent,
     }));
-
-    const fetchMe = async () => {
-        const token = getCookie('access_token');
-        if (token) {
-            const me = await useMe();
-            const opponent = await useOpponent();
-            userStore.setUser(me);
-            userStore.setOpponent(opponent);
-        } else {
-            await router.replace('/login');
-        }
-    };
-
-    useEffect(() => {
-        void fetchMe();
-    }, []);
 
     return (
         <Flex

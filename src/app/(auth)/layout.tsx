@@ -17,7 +17,7 @@ export default function Layout(props: Props) {
         if (token) {
             router.replace('/');
         }
-    });
+    }, []);
 
     return <>{children}</>;
 }

@@ -36,10 +36,10 @@ export const JOB = {
 export type Job = EnumValues<typeof JOB>;
 
 export const DATING_EXPERIENCE = {
-    많음: { value: 'a_lot', label: '많음' },
-    보통: { value: 'average', label: '보통' },
-    적음: { value: 'little', label: '적음' },
-    없음: { value: 'none', label: '없음' },
+    a_lot: { value: 'a_lot', label: '많음' },
+    average: { value: 'average', label: '보통' },
+    little: { value: 'little', label: '적음' },
+    none: { value: 'none', label: '없음' },
 } as const;
 export type DatingExperience = EnumValues<typeof DATING_EXPERIENCE>;
 
