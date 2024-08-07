@@ -14,7 +14,6 @@ import { useMe, useOpponent } from '@/hooks';
 import { useUserStore } from '@/stores';
 import { Flex, IconButton } from '@chakra-ui/react';
 import { getCookie } from 'cookies-next';
-import dayjs from 'dayjs';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -32,7 +31,7 @@ export default function Navigation() {
     const isAnswerPage = path === '/' || path.startsWith('/answer');
     const isFirstTalkPage = path.startsWith('/first_talk');
     const isConsultingPage = path.startsWith('/consulting');
-    const isProfilePage = path.startsWith('/profile');
+    const isProfilePage = path.startsWith('/profile/me');
 
     const handleAlert = () => {
         alert('준비 중입니다. 잠시만 기다려주세요! :)');
@@ -40,23 +39,19 @@ export default function Navigation() {
 
     const fetchMe = async () => {
         const token = getCookie('access_token');
-        userStore.setUser({
-            username: '진도은',
-            gender: 'FEMALE',
-            kakaoId: '3636039089',
-            mbti: 'ENTJ',
-            birth: dayjs().toISOString(),
-            userId: '',
-            profileImageUrl: 'http://k.kakaocdn.net/dn/JnJaE/btsIouDMnD6/LiGPmtuPB1Taj4KyOEkZ41/img_640x640.jpg',
-        });
         if (token) {
             const me = await useMe();
             const opponent = await useOpponent();
+            userStore.setUser(me);
             userStore.setOpponent(opponent);
         } else {
-            // router.replace('/login');
+            router.replace('/login');
         }
     };
+
+    useEffect(() => {
+        void fetchMe();
+    }, []);
 
     useEffect(() => {
         void fetchMe();
@@ -96,7 +91,7 @@ export default function Navigation() {
             >
                 {isConsultingPage ? <ConsultingOnIcon /> : <ConsultingOffIcon />}
             </IconButton>
-            <Link href="/profile">{isProfilePage ? <ProfileOnIcon /> : <ProfileOffIcon />}</Link>
+            <Link href="/profile/me">{isProfilePage ? <ProfileOnIcon /> : <ProfileOffIcon />}</Link>
         </Flex>
     );
 }
