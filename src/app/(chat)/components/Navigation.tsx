@@ -47,7 +47,7 @@ export default function Navigation() {
             mbti: 'ENTJ',
             birth: dayjs().toISOString(),
             userId: '',
-            // profileImageUrl: 'http://k.kakaocdn.net/dn/JnJaE/btsIouDMnD6/LiGPmtuPB1Taj4KyOEkZ41/img_640x640.jpg',
+            profileImageUrl: 'http://k.kakaocdn.net/dn/JnJaE/btsIouDMnD6/LiGPmtuPB1Taj4KyOEkZ41/img_640x640.jpg',
         });
         if (token) {
             const me = await useMe();
@@ -64,6 +64,7 @@ export default function Navigation() {
 
     return (
         <Flex
+            as="nav"
             position="fixed"
             left="50%"
             bottom="0"
