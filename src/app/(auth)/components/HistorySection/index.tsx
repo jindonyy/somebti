@@ -23,10 +23,12 @@ export default function HistorySection(props: Props) {
                 <Flex gap="16px" fontSize="14px">
                     <Center gap="4px">
                         <Input
-                            type="number"
+                            type="text"
+                            pattern="\d*"
                             variant="unstyled"
                             min={0}
                             minLength={1}
+                            maxLength={2}
                             width="48px"
                             height="52px"
                             px="16px"
@@ -40,10 +42,13 @@ export default function HistorySection(props: Props) {
                     </Center>
                     <Center gap="4px">
                         <Input
-                            type="number"
+                            type="text"
+                            pattern="\d*"
                             variant="unstyled"
                             min={0}
+                            max={12}
                             minLength={1}
+                            maxLength={2}
                             width="48px"
                             height="52px"
                             px="16px"
@@ -61,10 +66,12 @@ export default function HistorySection(props: Props) {
                 <Text>지금까지 만난 횟수</Text>
                 <Flex alignItems="center" gap="4px">
                     <Input
-                        type="number"
+                        type="text"
+                        pattern="\d*"
                         variant="unstyled"
                         min={0}
                         minLength={1}
+                        maxLength={10}
                         width="130px"
                         height="52px"
                         px="16px"

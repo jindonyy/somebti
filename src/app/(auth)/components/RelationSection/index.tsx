@@ -1,7 +1,6 @@
 import { Stack, useRadioGroup } from '@chakra-ui/react';
 import { RELATION } from '@/constants/user';
 import RelationCard from './RelationCard';
-import { useEffect } from 'react';
 import { Opponent } from '@/types';
 
 interface Props {
@@ -25,12 +24,6 @@ export default function RelationSection(props: Props) {
         onChange: handleChange,
     });
     const group = getRootProps();
-
-    useEffect(() => {
-        if (!user.relation) {
-            setCanNext(false);
-        }
-    }, []);
 
     return (
         <Stack {...group} width="100%" margin="0 auto" gap="14px">
