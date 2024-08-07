@@ -33,7 +33,7 @@ export default function Page() {
                             <IconButton
                                 as={Link}
                                 href="/terms/use"
-                                icon={<ArrowRightIcon />}
+                                icon={<ArrowRightIcon width="48px" height="48px" color="#737373" />}
                                 variant="ghost"
                                 _hover={{ bg: 'transparent' }}
                                 aria-label=""
@@ -46,7 +46,7 @@ export default function Page() {
                             <IconButton
                                 as={Link}
                                 href="/terms/info"
-                                icon={<ArrowRightIcon />}
+                                icon={<ArrowRightIcon width="48px" height="48px" color="#737373" />}
                                 variant="ghost"
                                 _hover={{ bg: 'transparent' }}
                                 aria-label=""
@@ -59,7 +59,7 @@ export default function Page() {
                             <IconButton
                                 as={Link}
                                 href="/terms/agree"
-                                icon={<ArrowRightIcon />}
+                                icon={<ArrowRightIcon width="48px" height="48px" color="#737373" />}
                                 variant="ghost"
                                 _hover={{ bg: 'transparent' }}
                                 aria-label=""
