@@ -1,9 +1,9 @@
 'use server';
 
 import { Box, Stack } from '@chakra-ui/react';
-import Profile from './components/Profile';
-import LeaveButton from './components/LeaveButton';
-import LogoutButton from './components/LogoutButton';
+import Profile from '@/app/(profile)/profile/components/Profile';
+import LeaveButton from '@/app/(profile)/profile/components/LeaveButton';
+import LogoutButton from '@/app/(profile)/profile/components/LogoutButton';
 
 export default async function Page() {
     return (
