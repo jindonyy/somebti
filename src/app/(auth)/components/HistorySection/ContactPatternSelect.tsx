@@ -12,10 +12,10 @@ export default function ContactPatternSelect() {
             fontSize="14px"
             className="ps-[16px]"
         >
-            <option value={CONTACT_PATTERN.매일.value}>{CONTACT_PATTERN.매일.label}</option>
-            <option value={CONTACT_PATTERN.일주일에_1번_이상.value}>{CONTACT_PATTERN.일주일에_1번_이상.label}</option>
-            <option value={CONTACT_PATTERN.한달에_1번_이상.value}>{CONTACT_PATTERN.한달에_1번_이상.label}</option>
-            <option value={CONTACT_PATTERN.거의_안_만남.value}>{CONTACT_PATTERN.거의_안_만남.label}</option>
+            <option value={CONTACT_PATTERN.everyday.value}>{CONTACT_PATTERN.everyday.label}</option>
+            <option value={CONTACT_PATTERN.week.value}>{CONTACT_PATTERN.week.label}</option>
+            <option value={CONTACT_PATTERN.month.value}>{CONTACT_PATTERN.month.label}</option>
+            <option value={CONTACT_PATTERN.never.value}>{CONTACT_PATTERN.never.label}</option>
         </Select>
     );
 }

@@ -61,18 +61,18 @@ export const FIRST_MEETING_REASON = {
 } as const;
 export type FirstMeetingReason = EnumValues<typeof FIRST_MEETING_REASON>;
 
-export const FIRST_MEETING_FREQUENCY = {
-    매일: { value: 'everyday', label: '매일' },
-    일주일에_1번_이상: { value: 'week', label: '일주일에 1번 이상' },
-    한달에_1번_이상: { value: 'month', label: '한달에 1번 이상' },
-    거의_안_만남: { value: 'never', label: '거의 안 만남' },
+export const MEETING_FREQUENCY = {
+    everyday: { value: 'everyday', label: '매일' },
+    week: { value: 'week', label: '일주일에 1번 이상' },
+    month: { value: 'month', label: '한달에 1번 이상' },
+    never: { value: 'never', label: '거의 안 만남' },
 } as const;
-export type FirstMeetingFrequency = EnumValues<typeof FIRST_MEETING_FREQUENCY>;
+export type FirstMeetingFrequency = EnumValues<typeof MEETING_FREQUENCY>;
 
 export const CONTACT_PATTERN = {
-    매일: { value: 'everyday', label: '매일' },
-    일주일에_1번_이상: { value: 'week', label: '일주일에 1번 이상' },
-    한달에_1번_이상: { value: 'month', label: '한달에 1번 이상' },
-    거의_안_만남: { value: 'never', label: '거의 안 만남' },
+    everyday: { value: 'everyday', label: '매일' },
+    week: { value: 'week', label: '일주일에 1번 이상' },
+    month: { value: 'month', label: '한달에 1번 이상' },
+    never: { value: 'never', label: '거의 안 만남' },
 } as const;
 export type ContactPattern = EnumValues<typeof CONTACT_PATTERN>;

@@ -1,11 +1,11 @@
 'use client';
 
-import { Box, Flex, IconButton, Stack } from '@chakra-ui/react';
+import { Box, Flex, IconButton, Stack, Text } from '@chakra-ui/react';
 import Profile from '@/app/(profile)/profile/components/Profile';
 import { useUserStore } from '@/stores';
 import InfoBox from '@/app/(profile)/profile/components/InfoBox';
 import { PencilIcon } from '@/assets';
-import { DATING_EXPERIENCE } from '@/constants/user';
+import { CONTACT_PATTERN, DATING_EXPERIENCE, MEETING_FREQUENCY } from '@/constants/user';
 
 export default async function Page() {
     const opponent = useUserStore(({ opponent }) => opponent);
@@ -38,7 +38,23 @@ export default async function Page() {
                     label="연애 경험"
                     text={opponent.datingExperience ? DATING_EXPERIENCE[opponent.datingExperience].label : '-'}
                 />
-                <InfoBox label="자유 내용" text={'-'} />
+            </Stack>
+            <Stack gap="12px" mt="40px">
+                <Text as="h3" pl="18px" fontWeight="600">
+                    나와의 관계
+                </Text>
+                <InfoBox label="처음 만나게 된 계기" text={opponent.firstMeetingReason ?? '-'} />
+                <InfoBox label="서로 알고 지낸 기간" text={'-'} />
+                <InfoBox label="지금까지 만난 횟수" text={`${opponent.meetingCount ?? 0}회`} />
+                <InfoBox label="취미" text={opponent.hobby ?? '-'} />
+                <InfoBox
+                    label="만남 빈도"
+                    text={opponent.meetingFrequency ? MEETING_FREQUENCY[opponent.meetingFrequency].label : '-'}
+                />
+                <InfoBox
+                    label="연락 패턴"
+                    text={opponent.contactPattern ? CONTACT_PATTERN[opponent.contactPattern].label : '-'}
+                />
             </Stack>
         </Box>
     );

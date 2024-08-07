@@ -1,4 +1,4 @@
-import { FIRST_MEETING_FREQUENCY } from '@/constants/user';
+import { MEETING_FREQUENCY } from '@/constants/user';
 import { Select } from '@chakra-ui/react';
 
 export default function FirstMeetingFrequencySelect() {
@@ -12,16 +12,10 @@ export default function FirstMeetingFrequencySelect() {
             fontSize="14px"
             className="ps-[16px]"
         >
-            <option value={FIRST_MEETING_FREQUENCY.매일.value}>{FIRST_MEETING_FREQUENCY.매일.label}</option>
-            <option value={FIRST_MEETING_FREQUENCY.일주일에_1번_이상.value}>
-                {FIRST_MEETING_FREQUENCY.일주일에_1번_이상.label}
-            </option>
-            <option value={FIRST_MEETING_FREQUENCY.한달에_1번_이상.value}>
-                {FIRST_MEETING_FREQUENCY.한달에_1번_이상.label}
-            </option>
-            <option value={FIRST_MEETING_FREQUENCY.거의_안_만남.value}>
-                {FIRST_MEETING_FREQUENCY.거의_안_만남.label}
-            </option>
+            <option value={MEETING_FREQUENCY.everyday.value}>{MEETING_FREQUENCY.everyday.label}</option>
+            <option value={MEETING_FREQUENCY.week.value}>{MEETING_FREQUENCY.week.label}</option>
+            <option value={MEETING_FREQUENCY.month.value}>{MEETING_FREQUENCY.month.label}</option>
+            <option value={MEETING_FREQUENCY.never.value}>{MEETING_FREQUENCY.never.label}</option>
         </Select>
     );
 }
