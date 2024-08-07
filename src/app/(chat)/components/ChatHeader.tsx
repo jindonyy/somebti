@@ -1,8 +1,9 @@
 'use client';
 
-import { Avatar, Center, Flex, Text } from '@chakra-ui/react';
-import { Avatar as AvatarIcon } from '@/assets';
+import { Avatar, Center, Flex, IconButton, Text } from '@chakra-ui/react';
+import { Avatar as AvatarIcon, MoreVertIcon } from '@/assets';
 import { useUserStore } from '@/stores';
+import Link from 'next/link';
 
 export default function ChatHeader() {
     const userStore = useUserStore(({ user, opponent }) => ({
@@ -17,6 +18,7 @@ export default function ChatHeader() {
             top="10px"
             left="50%"
             justify="space-between"
+            alignItems="center"
             gap="20px"
             width="min(calc(100% - 48px), calc(420px - 48px))"
             p="13px"
@@ -49,11 +51,16 @@ export default function ChatHeader() {
                     </Text>
                 )}
             </Center>
-            <Avatar
-                icon={<AvatarIcon width="36px" />}
-                src={userStore.user.profileImageUrl ?? ''}
+            <IconButton
+                icon={<MoreVertIcon width="24px" height="24px" />}
+                as={Link}
+                href="/profile/opponent"
+                variant="ghost"
                 width="36px"
+                minWidth="none"
                 height="36px"
+                _hover={{ bgColor: 'transparent' }}
+                aria-label=""
             />
         </Flex>
     );

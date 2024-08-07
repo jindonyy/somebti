@@ -13,3 +13,4 @@ export { default as SendOnIcon } from './send-on.svg';
 export { default as SendOffIcon } from './send-off.svg';
 export { default as SettingIcon } from './setting.svg';
 export { default as PencilIcon } from './pencil.svg';
+export { default as MoreVertIcon } from './more_vert.svg';
