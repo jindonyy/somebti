@@ -10,7 +10,7 @@ export const clientLogin = async (kakaoId: string) => {
     return response;
 };
 
-export const clientSignUp = async (params: { user: User; opponent: Opponent }) => {
+export const clientSignUp = async (params: { user: Omit<User, 'userId'>; opponent: Opponent }) => {
     const response = await clientFetch<SignUpResponse>(`/auth/signup`, {
         method: 'POST',
         body: JSON.stringify(params),
