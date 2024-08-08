@@ -95,8 +95,9 @@ export default function Page() {
 
     const handleSignUp = async () => {
         try {
+            const { userId, ...userPayload } = userStore.user;
             const { token, user, opponent } = await clientSignUp({
-                user: userStore.user,
+                user: userPayload,
                 opponent: userStore.opponent,
             });
             if (token) {
