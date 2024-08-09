@@ -12,9 +12,9 @@ export default function AuthSection() {
     const handleLogout = async () => {
         const token = getCookie('access_token');
         if (token) {
+            window.Kakao.Auth.logout();
             deleteCookie('access_token');
             deleteCookie('kakao_access_token');
-            window.Kakao.Auth.logout();
             router.replace('/login');
         }
     };
