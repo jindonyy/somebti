@@ -14,8 +14,8 @@ export default function DatingExperienceSelect() {
         >
             <option value={DATING_EXPERIENCE.a_lot.value}>{DATING_EXPERIENCE.a_lot.label}</option>
             <option value={DATING_EXPERIENCE.average.value}>{DATING_EXPERIENCE.average.label}</option>
-            <option value={DATING_EXPERIENCE.little.value}>{DATING_EXPERIENCE.little.value}</option>
-            <option value={DATING_EXPERIENCE.none.value}>{DATING_EXPERIENCE.none.value}</option>
+            <option value={DATING_EXPERIENCE.little.value}>{DATING_EXPERIENCE.little.label}</option>
+            <option value={DATING_EXPERIENCE.none.value}>{DATING_EXPERIENCE.none.label}</option>
         </Select>
     );
 }
