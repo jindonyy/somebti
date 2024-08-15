@@ -2,7 +2,7 @@
 
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 type Props = Readonly<{
     children: React.ReactNode;
@@ -12,7 +12,7 @@ export default function Layout(props: Props) {
     const { children } = props;
     const router = useRouter();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const token = getCookie('access_token');
         if (token) {
             router.replace('/');
